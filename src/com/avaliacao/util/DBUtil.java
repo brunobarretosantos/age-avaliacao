@@ -11,7 +11,7 @@ public class DBUtil {
     static {
         try {
             InitialContext ctx = new InitialContext();
-            dataSource = (DataSource) ctx.lookup("java:/MeuDS");
+            dataSource = (DataSource) ctx.lookup("java:jboss/datasources/MeuDS");
         } catch (Exception e) {
             e.printStackTrace();
         }

@@ -8,5 +8,9 @@
         <action name="login" class="com.avaliacao.actions.LoginAction">
             <result name="success">/login.jsp</result>
         </action>
+        
+        <action name="register" class="com.avaliacao.actions.RegisterAction">
+            <result name="success">/register.jsp</result>
+        </action>
     </package>
 </struts>
