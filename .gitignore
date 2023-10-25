@@ -1,0 +1,26 @@
+# Arquivos compilados
+target/
+bin/
+*.class
+
+# Arquivos de configuração específicos do sistema
+.DS_Store
+Thumbs.db
+
+# Arquivos de configuração do Eclipse
+.project
+.settings/
+
+# Arquivos de configuração do IntelliJ IDEA
+.idea/
+
+# Dependências Maven
+/.m2/
+
+# Logs e caches do Wildfly
+standalone/log/
+standalone/data/
+standalone/tmp/
+
+# Arquivos gerados pelo Struts
+web/struts/
