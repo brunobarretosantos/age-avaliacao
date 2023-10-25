@@ -1,14 +1,14 @@
 package com.avaliacao.dao;
 
-import com.avaliacao.model.Usuario;
-import com.avaliacao.util.DBUtil;
-
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+
+import com.avaliacao.model.Usuario;
+import com.avaliacao.util.DBUtil;
 
 public class UsuarioDAO {
 
@@ -32,16 +32,16 @@ public class UsuarioDAO {
                 usuario.setNmRole(resultSet.getString("nm_role"));
                 usuarios.add(usuario);
             }
-            
+
             connection.close();
 
         } catch (Exception e) {
             e.printStackTrace();
-        } 
-        
+        }
+
         return usuarios;
     }
-    
+
     public int contarUsuarios() {
         Connection connection = null;
         PreparedStatement preparedStatement = null;
@@ -56,16 +56,16 @@ public class UsuarioDAO {
             if (resultSet.next()) {
                 return resultSet.getInt(1);
             }
-            
+
             connection.close();
 
         } catch (SQLException e) {
-            e.printStackTrace(); 
+            e.printStackTrace();
         } catch (Exception e) {
-			
+
 			e.printStackTrace();
 		}
-        
+
         return 0;
     }
 }

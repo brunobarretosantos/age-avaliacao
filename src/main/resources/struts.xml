@@ -1,16 +1,14 @@
-<!DOCTYPE struts PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN" "http://struts.apache.org/dtds/struts-2.0.dtd">
+<!DOCTYPE struts PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 2.5//EN" "http://struts.apache.org/dtds/struts-2.5.dtd">
 <struts>
-    <package name="default" namespace="/" extends="struts-default">
-        <action name="index" class="com.avaliacao.actions.IndexAction">
+	<constant name="struts.devMode" value="true" />
+    <package name="basicstruts2" extends="struts-default">
+        <action name="index">
+            <result>/index.jsp</result>
+        </action>
+        
+        <action name="hello" class="com.avaliacao.actions.IndexAction" method="execute">
             <result name="success">/index.jsp</result>
-        </action>
-        
-        <action name="login" class="com.avaliacao.actions.LoginAction">
-            <result name="success">/login.jsp</result>
-        </action>
-        
-        <action name="register" class="com.avaliacao.actions.RegisterAction">
-            <result name="success">/register.jsp</result>
+            <result name="error">/register/index.jsp</result>
         </action>
     </package>
 </struts>

@@ -1,13 +1,14 @@
 package com.avaliacao.actions;
 
 import java.util.List;
+
 import com.avaliacao.dao.ExameDAO;
 import com.avaliacao.model.Exame;
 import com.opensymphony.xwork2.ActionSupport;
 
 public class ExameAction extends ActionSupport {
     /**
-	 * 
+	 *
 	 */
 	private static final long serialVersionUID = 1L;
 	private Exame exame;

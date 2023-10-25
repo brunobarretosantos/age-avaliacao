@@ -1,13 +1,14 @@
 package com.avaliacao.actions;
 
 import java.util.List;
+
 import com.avaliacao.dao.FuncionarioDAO;
 import com.avaliacao.model.Funcionario;
 import com.opensymphony.xwork2.ActionSupport;
 
 public class FuncionarioAction extends ActionSupport {
     /**
-	 * 
+	 *
 	 */
 	private static final long serialVersionUID = 1L;
 	private Funcionario funcionario;

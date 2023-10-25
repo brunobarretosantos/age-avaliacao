@@ -6,6 +6,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+
 import com.avaliacao.model.ExameRealizado;
 
 public class ExameRealizadoDAO {
@@ -40,5 +41,5 @@ public class ExameRealizadoDAO {
         rs.close();
         stmt.close();
         return listaExamesRealizados;
-    } 
+    }
 }

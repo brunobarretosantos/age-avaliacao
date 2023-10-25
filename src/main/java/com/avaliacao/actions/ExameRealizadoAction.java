@@ -1,6 +1,7 @@
 package com.avaliacao.actions;
 
 import java.util.List;
+
 import com.avaliacao.dao.ExameRealizadoDAO;
 import com.avaliacao.model.Exame;
 import com.avaliacao.model.ExameRealizado;
@@ -9,7 +10,7 @@ import com.opensymphony.xwork2.ActionSupport;
 
 public class ExameRealizadoAction extends ActionSupport {
     /**
-	 * 
+	 *
 	 */
 	private static final long serialVersionUID = 1L;
 	private ExameRealizado exameRealizado;

@@ -6,11 +6,12 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+
 import com.avaliacao.model.Exame;
 
 public class ExameDAO {
     private Connection conexao;
-    
+
     public ExameDAO(Connection conexao) {
         this.conexao = conexao;
     }
