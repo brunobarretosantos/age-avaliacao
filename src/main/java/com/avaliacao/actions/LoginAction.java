@@ -1,6 +1,8 @@
 package com.avaliacao.actions;
 
 import java.util.logging.Logger;
+import javax.servlet.http.HttpSession;
+import org.apache.struts2.ServletActionContext;
 
 import com.avaliacao.facade.UsuarioFacade;
 import com.avaliacao.model.Usuario;
@@ -47,6 +49,9 @@ public class LoginAction extends ActionSupport {
 
             if (usuarioAutenticado != null) {
             	logger.info("execute.usuarioAutenticado");
+            	
+            	HttpSession session = ServletActionContext.getRequest().getSession(true);            	
+                session.setAttribute("currentUser", usuario);
             	
                 return SUCCESS;
             } else {

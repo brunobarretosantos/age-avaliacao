@@ -45,19 +45,19 @@ public class UsuarioDAO {
         return usuarios;
     }
 
-    public int contarUsuarios() {
+    public boolean hasUsuarios() {
         Connection connection = null;
         PreparedStatement preparedStatement = null;
         ResultSet resultSet = null;
 
         try {
             connection = DBUtil.getConnection();
-            String query = "SELECT COUNT(*) FROM usuario";
+            String query = "SELECT 1 FROM usuario LIMIT 1";
             preparedStatement = connection.prepareStatement(query);
             resultSet = preparedStatement.executeQuery();
 
             if (resultSet.next()) {
-                return resultSet.getInt(1);
+                return true;
             }
 
             connection.close();
@@ -69,7 +69,7 @@ public class UsuarioDAO {
 			e.printStackTrace();
 		}
 
-        return 0;
+        return false;
     }
     
     public void inserirUsuario(Usuario usuario) {

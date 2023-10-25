@@ -1,11 +1,23 @@
 <!DOCTYPE struts PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 2.5//EN" "http://struts.apache.org/dtds/struts-2.5.dtd">
 <struts>
 	<constant name="struts.devMode" value="true" />
-	<constant name="struts.i18n.encoding" value="UTF-8" />
+	<constant name="struts.i18n.encoding" value="UTF-8" />	
     
     <package name="default" namespace="/" extends="struts-default">
+		
+		<interceptors>
+	        <interceptor name="sessionIntercept" class="com.avaliacao.interceptors.SessionInterceptor"/>
+	        <interceptor-stack name="interceptorStack">
+	            <interceptor-ref name="sessionIntercept"/>
+	            <interceptor-ref name="defaultStack"/>
+	        </interceptor-stack>
+	    </interceptors>
+	
+	    <default-interceptor-ref name="interceptorStack"/>
+		
 		<default-action-ref name="index" />
         <action name="index" class="com.avaliacao.actions.IndexAction" method="execute">
+			<result name="login" type="redirect">/auth/login</result>
             <result name="success">/index.jsp</result>
             <result name="error412" type="redirect">/user-admin/create</result>
         </action>
@@ -27,7 +39,7 @@
         </action>
         
         <action name="execute" class="com.avaliacao.actions.LoginAction" method="execute">
-            <result name="success">/success.jsp</result>
+            <result name="success" type="redirect">/</result>
             <result name="error">/views/auth/login.jsp</result>
         </action>
     </package>
