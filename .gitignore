@@ -24,3 +24,5 @@ standalone/tmp/
 
 # Arquivos gerados pelo Struts
 web/struts/
+
+.fake
