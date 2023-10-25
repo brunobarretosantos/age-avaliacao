@@ -24,8 +24,27 @@
       <version>2.5.32</version>
       <scope>provided</scope>
     </dependency>
+    <dependency>
+      <groupId>org.webjars</groupId>
+      <artifactId>bootstrap</artifactId>
+      <version>5.3.2</version>
+    </dependency>
   </dependencies>
   <build>
     <finalName>avaliacao</finalName>
+    <plugins>
+        <plugin>
+            <groupId>org.webjars</groupId>
+            <artifactId>webjars-locator-maven-plugin</artifactId>
+            <version>0.40</version> <!-- Use a versão mais recente -->
+            <executions>
+                <execution>
+                    <goals>
+                        <goal>install</goal>
+                    </goals>
+                </execution>
+            </executions>
+        </plugin>
+    </plugins>
   </build>
 </project>

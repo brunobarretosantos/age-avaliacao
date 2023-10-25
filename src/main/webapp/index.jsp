@@ -2,15 +2,15 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Minha Página Inicial</title>
-    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <title>Minha Página Inicial</title>    
+    <link href="/webjars/bootstrap/5.3.2/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
     <div class="container">
         <h1>Bem-vindo ao Meu Projeto</h1>
-        <p>Esta é a página inicial do projeto.</p>
+        <p>Esta é a página inicial do projeto ok.</p>
     </div>
 
-    <script src="js/bootstrap.min.js"></script>
+    <script src="/webjars/bootstrap/5.3.2/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
