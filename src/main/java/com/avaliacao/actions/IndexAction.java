@@ -18,13 +18,15 @@ public class IndexAction extends ActionSupport {
 
 		logger.info("Chegou aqui");
 
-		/*
-		 * UsuarioDAO usuarioDAO = new UsuarioDAO(); int quantidadeUsuarios =
-		 * usuarioDAO.contarUsuarios();
-		 * 
-		 * if (quantidadeUsuarios == 0) { return "error412"; }
-		 */
+		
+	    UsuarioDAO usuarioDAO = new UsuarioDAO(); int quantidadeUsuarios =
+	    usuarioDAO.contarUsuarios();
+	    
+	    logger.info("quantidadeUsuarios: " + quantidadeUsuarios);
+	  
+	    if (quantidadeUsuarios == 0) { return "error412"; }
+		 
 
-		return ERROR;
+		return SUCCESS;
 	}
 }
