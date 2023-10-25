@@ -11,17 +11,7 @@ public class IndexAction extends ActionSupport {
 	 *
 	 */
 	private static final long serialVersionUID = 1L;
-	private static final Logger logger = Logger.getLogger(IndexAction.class.getName());
-	
-	 private boolean registerAdmin; 
-
-    public boolean isRegisterAdmin() {
-        return registerAdmin;
-    }
-
-    public void setRegisterAdmin(boolean isAdmin) {
-        this.registerAdmin = isAdmin;
-    }
+	private static final Logger logger = Logger.getLogger(IndexAction.class.getName());    
 
 	@Override
 	public String execute() {
@@ -35,7 +25,6 @@ public class IndexAction extends ActionSupport {
 	    logger.info("quantidadeUsuarios: " + quantidadeUsuarios);
 	  
 	    if (quantidadeUsuarios == 0) {
-	    	setRegisterAdmin(true);
 	    	return "error412"; 
     	}
 		 
