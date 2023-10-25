@@ -32,14 +32,13 @@ public class UsuarioDAO {
                 usuario.setNmRole(resultSet.getString("nm_role"));
                 usuarios.add(usuario);
             }
+            
+            connection.close();
 
-        } catch (SQLException e) {
+        } catch (Exception e) {
             e.printStackTrace();
-            // Trate a exceção conforme necessário
-        } finally {
-            DBUtil.close(resultSet, preparedStatement, connection);
-        }
-
+        } 
+        
         return usuarios;
     }
     
@@ -57,13 +56,16 @@ public class UsuarioDAO {
             if (resultSet.next()) {
                 return resultSet.getInt(1);
             }
+            
+            connection.close();
 
         } catch (SQLException e) {
             e.printStackTrace(); 
-        } finally {
-            DBUtil.close(resultSet, preparedStatement, connection);
-        }
-
+        } catch (Exception e) {
+			
+			e.printStackTrace();
+		}
+        
         return 0;
     }
 }

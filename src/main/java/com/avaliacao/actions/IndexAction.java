@@ -10,13 +10,13 @@ public class IndexAction extends ActionSupport {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	private static final Logger logger = Logger.getLogger(MinhaClasse.class.getName());
+	private static final Logger logger = Logger.getLogger(IndexAction.class.getName());
 
 	public String execute() {
 		
 		logger.info("Chegou aqui");
 		
-		UsuarioDAO usuarioDAO = null;
+		UsuarioDAO usuarioDAO = new UsuarioDAO();
         int quantidadeUsuarios = usuarioDAO.contarUsuarios();
 
         if (quantidadeUsuarios == 0) {
