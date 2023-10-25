@@ -1,6 +1,8 @@
 <!DOCTYPE struts PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 2.5//EN" "http://struts.apache.org/dtds/struts-2.5.dtd">
 <struts>
 	<constant name="struts.devMode" value="true" />
+	<constant name="struts.i18n.encoding" value="UTF-8" />
+    
     <package name="default" namespace="/" extends="struts-default">
 		<default-action-ref name="index" />
         <action name="index" class="com.avaliacao.actions.IndexAction" method="execute">
@@ -12,8 +14,21 @@
     <package name="user-admin" namespace="/user-admin" extends="struts-default">
 		<default-action-ref name="create" />
         <action name="create" class="com.avaliacao.actions.UsuarioAdminAction" method="execute">
+			<result name="input">/views/user-admin/create.jsp</result>
             <result name="success">/views/user-admin/success.jsp</result>
             <result name="error">/views/user-admin/create.jsp</result>
+        </action>
+    </package>
+    
+    <package name="auth" namespace="/auth"  extends="struts-default">
+		<default-action-ref name="login" />
+        <action name="login" class="com.avaliacao.actions.LoginAction" method="loginForm">
+			<result name="input">/views/auth/login.jsp</result>
+        </action>
+        
+        <action name="execute" class="com.avaliacao.actions.LoginAction" method="execute">
+            <result name="success">/success.jsp</result>
+            <result name="error">/views/auth/login.jsp</result>
         </action>
     </package>
 </struts>

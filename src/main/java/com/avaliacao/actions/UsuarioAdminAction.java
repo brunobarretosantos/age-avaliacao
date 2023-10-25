@@ -45,30 +45,13 @@ public class UsuarioAdminAction extends ActionSupport {
     public String execute() {
     	try {
 			logger.info("cadastrarUsuarioAdmin");
-			
-			if (usuario == null) {
-				logger.info("cadastrarUsuario.usuario.null");
-				errorMessage = "Ocorreu um erro ao cadastrar o usuário.";
-				return ERROR;
-			}
-			
-			logger.info("cadastrarUsuario.usuario.not.null");
-			
-			if (usuarioFacade == null) {
-				logger.info("cadastrarUsuario.usuarioFacade.null");
-				errorMessage = "Ocorreu um erro ao cadastrar o usuário.";
-				return ERROR;
-			}
-			
-			logger.info("cadastrarUsuario.usuarioFacade.not.null");
-			
+					
 			if (usuario.getNmLogin() == null || usuario.getNmLogin().trim().isEmpty()) {
 				errorMessage = "Informe o login";
 				return ERROR;
 	        }
 			
-			usuario.setNmRole("ADMIN");
-			
+			usuario.setNmRole("ADMIN");			
 			usuarioFacade.cadastrarUsuario(usuario);
 			
 			return SUCCESS;

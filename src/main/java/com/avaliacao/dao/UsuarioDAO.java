@@ -90,9 +90,43 @@ public class UsuarioDAO {
             statement.setString(4, usuario.getNmRole());
 
             statement.executeUpdate();
+            
+            connection.close();
         } catch (Exception e) {
         	logger.info("inserirUsuario.exception");
             e.printStackTrace();
         }
+    }
+    
+    public Usuario getByLogin(String nmLogin) {
+    	logger.info("getByLogin");
+        Connection connection = null;
+        PreparedStatement statement = null;
+        ResultSet resultSet = null;
+        Usuario usuario = null;
+
+        try {
+            connection = DBUtil.getConnection();
+            String query = "SELECT * FROM avaliacao.usuario WHERE nm_login = ?";
+            statement = connection.prepareStatement(query);
+            statement.setString(1, nmLogin);
+            resultSet = statement.executeQuery();
+
+            if (resultSet.next()) {
+                usuario = new Usuario();
+                usuario.setNmLogin(resultSet.getString("nm_login"));
+                usuario.setDsSenha(resultSet.getString("ds_senha"));
+                usuario.setQtTempoInatividade(resultSet.getInt("qt_tempo_inatividade"));
+                usuario.setNmRole(resultSet.getString("nm_role"));
+                usuario.setIsPasswordEncripted(true);
+            }
+            
+            connection.close();
+        } catch (Exception e) {
+        	logger.info("getByLogin.exception");
+            e.printStackTrace();
+        }
+        
+        return usuario;
     }
 }

@@ -5,8 +5,6 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.logging.Logger;
 
-import com.avaliacao.actions.UsuarioAdminAction;
-
 public class Usuario {	
 	private static final Logger logger = Logger.getLogger(Usuario.class.getName());
 	
@@ -14,6 +12,7 @@ public class Usuario {
 	private String dsSenha;
     private int qtTempoInatividade;    
     private String nmRole;
+    private Boolean isPasswordEncripted = false;
 
     public String getNmLogin() {
         return nmLogin;
@@ -47,14 +46,21 @@ public class Usuario {
         }
     }
     
+    public void setIsPasswordEncripted(Boolean isPasswordEncripted) {
+    	this.isPasswordEncripted = isPasswordEncripted;
+    }
+    
+    
     public String getEncryptedPassword() throws Exception {
-    	return Usuario.makeEncryptedPassword(dsSenha);
+    	logger.info("getEncryptedPassword.isPasswordEncripted: " + isPasswordEncripted);
+    	logger.info("getEncryptedPassword.dsSenha: " + dsSenha);
+    	return Boolean.TRUE.equals(isPasswordEncripted) ? dsSenha : Usuario.makeEncryptedPassword(dsSenha);
     }
     
     public static String makeEncryptedPassword(String originalPassword) throws Exception {
         try {
         	if (originalPassword == null || originalPassword.trim().isEmpty()) {
-        		throw new Exception("Senha inválida");
+        		throw new IllegalArgumentException("Informe a senha");
         	}
         	
             MessageDigest digest = MessageDigest.getInstance("SHA-256");
