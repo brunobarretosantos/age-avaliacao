@@ -37,6 +37,14 @@
             
             window.location.href = "consulta?"
         }
+        
+        function novoExame() {
+            window.location.href = "cadastro"; // Redireciona para a tela de cadastro
+        }
+
+        function editarExame(id) {
+            window.location.href = "cadastro?id=" + id; // Redireciona para a tela de edição
+        }
 
     </script>
 
@@ -60,7 +68,8 @@
 			</div>
 
 	        <button type="button" class="btn btn-primary mr-3" onclick="consulta(1)">Pesquisar</button>
-	        <button type="button" class="btn btn-secondary" onclick="limparCampos()">Limpar</button>
+	        <button type="button" class="btn btn-secondary mr-3" onclick="limparCampos()">Limpar</button>
+	        <button type="button" class="btn btn-success" onclick="novoExame()">Novo Exame</button>	        
 	    </form>
 	    
         <table class="table">
@@ -69,6 +78,7 @@
                     <th>Código</th>
                     <th>Nome do Exame</th>
                     <th>Ativo</th>
+                    <th>Ações</th>
                 </tr>
             </thead>
             <tbody>
@@ -77,6 +87,9 @@
                         <td><s:property value="cdExame"/></td>
                         <td><s:property value="nmExame"/></td>
                         <td><s:property value="icAtivo ? 'Sim' : 'Não'"/></td>
+                        <td>
+			                <button type="button" class="btn btn-info btn-sm" onclick="editarExame('<s:property value="cdExame"/>')">Editar</button>
+			            </td>
                     </tr>
                 </s:iterator>
             </tbody>
