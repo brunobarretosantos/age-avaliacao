@@ -30,4 +30,23 @@ public class ExameFacade {
 
         return (int) Math.ceil((double) totalRegistros / consultaExamesModel.getRegistrosPorPagina());
     }
+    
+    public Exame incluirExame(Exame exame) {
+    	int id = exameDAO.incluirExame(exame);
+    	
+    	if (id > 0) {
+    		return exameDAO.getExameById(id);
+    	}
+    	
+    	return null;
+    }
+    
+    public boolean alterarExame(Exame exame) {
+    	return exameDAO.alterarExame(exame);    	
+    }
+
+    public Exame carregarExame(int id) {
+        return exameDAO.getExameById(id);
+    }
+
 }
