@@ -64,4 +64,27 @@
             <result name="error">/views/exames/cadastro.jsp</result>
         </action>
     </package>
+    
+    <package name="funcionarios" namespace="/funcionarios" extends="struts-default">
+	    <default-action-ref name="index" />
+	    
+	    <action name="index" class="com.avaliacao.actions.funcionarios.ConsultaAction" method="execute">			
+	        <result name="success">/views/funcionarios/consulta.jsp</result>            
+	    </action>
+	    
+	    <action name="cadastro" class="com.avaliacao.actions.funcionarios.CadastroAction" method="cadastro">			
+	        <result name="input">/views/funcionarios/cadastro.jsp</result>            
+	    </action>
+	    
+	    <action name="executeCadastro" class="com.avaliacao.actions.funcionarios.CadastroAction" method="execute">			
+	        <result name="success">/views/funcionarios/cadastro.jsp</result>
+	        <result name="error">/views/funcionarios/cadastro.jsp</result>
+	    </action>
+	    
+	    <action name="excluir" class="com.avaliacao.actions.funcionarios.CadastroAction" method="excluir">			            
+	        <result name="success" type="redirect">/funcionarios/consulta</result>
+	        <result name="error">/views/funcionarios/cadastro.jsp</result>
+	    </action>
+	</package>
+
 </struts>

@@ -1,23 +1,26 @@
 package com.avaliacao.model;
 
-public class Funcionario {
-    private int codigo;
-    private String nome;
+import java.io.Serializable;
 
-    // Getters e Setters
-    public int getCodigo() {
-        return codigo;
+public class Funcionario implements Serializable {
+    private static final long serialVersionUID = 1L;
+
+    private int cdFuncionario;
+    private String nmFuncionario;
+
+    public int getCdFuncionario() {
+        return cdFuncionario;
     }
 
-    public void setCodigo(int codigo) {
-        this.codigo = codigo;
+    public void setCdFuncionario(int cdFuncionario) {
+        this.cdFuncionario = cdFuncionario;
     }
 
-    public String getNome() {
-        return nome;
+    public String getNmFuncionario() {
+        return nmFuncionario;
     }
 
-    public void setNome(String nome) {
-        this.nome = nome;
-    }
+    public void setNmFuncionario(String nmFuncionario) {
+        this.nmFuncionario = nmFuncionario;
+    }    
 }

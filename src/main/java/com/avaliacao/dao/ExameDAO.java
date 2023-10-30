@@ -48,7 +48,6 @@ public class ExameDAO {
 
 	    return null;
 	}
-
     
     public List<Exame> listarExames(int pagina, int qtdPagina, String nm_exame, Integer cd_exame, Boolean ic_ativo) {
     	logger.info("pagina: " + pagina);
