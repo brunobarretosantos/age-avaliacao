@@ -9,8 +9,60 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 </head>
 <body>
+	<script>
+        function consultarExames(pagina) {
+            var queryParams = "";
+
+            var codigo = document.getElementById("codigo").value;
+            var nome = document.getElementById("nome").value;
+            var ativo = document.getElementById("ativo").value;
+
+            if (codigo && !isNaN(codigo)) {
+                queryParams += "&codigo=" + codigo;
+            }
+            if (nome) {
+                queryParams += "&nome=" + nome.trim();
+            }
+            if (ativo === 'sim' || ativo === 'nao') {
+                queryParams += "&ativo=" + ativo;
+            }
+
+            window.location.href = "consultarExames?pagina=" + pagina + queryParams;
+        }
+        
+        function limparCampos() {
+            document.getElementById('codigo').value = '';
+            document.getElementById('nome').value = '';
+            document.getElementById('ativo').value = 'todos';
+            
+            window.location.href = "consultarExames?"
+        }
+
+    </script>
+
+
     <div class="container">
         <h2>Consulta de Exames</h2>
+
+    	<form class="form-inline mb-3 mt-3">
+	        <div class="form-group mr-3">
+	            <label for="codigo" class="mr-2">Código:</label>
+	            <s:textfield name="codigo" id="codigo" class="form-control" value="%{consultaExamesModel.cd_exame}" />
+			</div>
+	        <div class="form-group mr-3">
+	            <label for="nome" class="mr-2">Nome:</label>
+	            <s:textfield name="nome" id="nome" class="form-control" value="%{consultaExamesModel.nm_exame}" />
+	        </div>
+	        <div class="form-group mr-3">
+			    <label for="ativo" class="mr-2">Ativo:</label>
+			    <s:select name="ativo" id="ativo" class="form-control" list="#{'todos': 'Todos', 'sim':'Sim', 'nao':'Não'}" value="%{consultaExamesModel.ic_ativo}">
+			    </s:select>
+			</div>
+
+	        <button type="button" class="btn btn-primary mr-3" onclick="consultarExames(1)">Pesquisar</button>
+	        <button type="button" class="btn btn-secondary" onclick="limparCampos()">Limpar</button>
+	    </form>
+	    
         <table class="table">
             <thead>
                 <tr>
@@ -29,50 +81,51 @@
                 </s:iterator>
             </tbody>
         </table>
-        <span>${consultaExamesModel.primeiraPagina}</span>
-        <span>${consultaExamesModel.ultimaPagina}</span>
 		<nav aria-label="Page navigation" class="d-flex justify-content-center">
 		    <ul class="pagination">
 		        <li class="page-item">
 		            <s:if test="consultaExamesModel.paginaAtual > 1">
-		                <a class="page-link" href="?pagina=1" aria-label="First">
-		                    <span aria-hidden="true">«« Primeira</span>
-		                </a>
+		                <button class="page-link" onclick="consultarExames(1)" aria-label="Previous">
+						    <span aria-hidden="true">«« Primeira</span>
+						</button>
 		            </s:if>
 		        </li>
 		       		 
 		        <li class="page-item">
 		            <s:if test="consultaExamesModel.paginaAtual > 1">
-		                <a class="page-link" href="?pagina=${consultaExamesModel.paginaAtual - 1}" aria-label="Previous">
-		                    <span aria-hidden="true">&laquo; Anterior</span>
-		                </a>
+		                <button class="page-link" onclick="consultarExames(${consultaExamesModel.paginaAtual - 1})" aria-label="Previous">
+						    <span aria-hidden="true">&laquo; Anterior</span>
+						</button>
 		            </s:if>
 		        </li>      
 		
-		        <s:iterator begin="consultaExamesModel.primeiraPagina" end="consultaExamesModel.ultimaPagina" var="i">
+				
+		        <s:iterator begin="consultaExamesModel.primeiraPagina" end="consultaExamesModel.ultimaPagina" var="i">		        	
 		            <li class="page-item">
-		                <s:if test="consultaExamesModel.paginaAtual == i">
-		                    <span class="page-link page-active">${i}</span>
+		                <s:if test="consultaExamesModel.paginaAtual eq i">
+		                    <span class="page-link active">${i}</span>
 		                </s:if>
 		                <s:else>
-		                    <a class="page-link" href="?pagina=${i}">${i}</a>
+			                <button class="page-link" onclick="consultarExames(${i})" aria-label="Previous">
+			                	${i}
+							</button>		                    
 		                </s:else>
 		            </li>
 		        </s:iterator>
 		
 		        <li class="page-item">
 		            <s:if test="consultaExamesModel.paginaAtual < consultaExamesModel.totalPaginas">
-		                <a class="page-link" href="?pagina=${consultaExamesModel.paginaAtual + 1}" aria-label="Next">
-		                    <span aria-hidden="true">Próxima &raquo;</span>
-		                </a>
+		                <button class="page-link" onclick="consultarExames(${consultaExamesModel.paginaAtual + 1})" aria-label="Previous">
+						    <span aria-hidden="true">Próxima &raquo;</span>
+						</button>
 		            </s:if>
 		        </li>
 		        
 		        <li class="page-item">
-		            <s:if test="consultaExamesModel.paginaAtual < consultaExamesModel.totalPaginas">
-		                <a class="page-link" href="?pagina=${consultaExamesModel.totalPaginas}" aria-label="Last">
-		                    <span aria-hidden="true">Última »»</span>
-		                </a>
+		            <s:if test="consultaExamesModel.paginaAtual < consultaExamesModel.totalPaginas">		                
+		                <button class="page-link" onclick="consultarExames(${consultaExamesModel.totalPaginas})" aria-label="Previous">
+						    <span aria-hidden="true">Última »»</span>
+						</button>
 		            </s:if>
 		        </li>
 		    </ul>

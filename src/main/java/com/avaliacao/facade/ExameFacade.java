@@ -1,6 +1,7 @@
 package com.avaliacao.facade;
 
 import com.avaliacao.dao.ExameDAO;
+import com.avaliacao.model.ConsultaExamesModel;
 import com.avaliacao.model.Exame;
 
 import java.util.List;
@@ -12,13 +13,21 @@ public class ExameFacade {
         exameDAO = new ExameDAO();
     }
 
-    public List<Exame> getListaExamesPaginada(int pagina, int registrosPorPagina) {
-        return exameDAO.listarExames(pagina, registrosPorPagina);
+    public List<Exame> getListaExamesPaginada(ConsultaExamesModel consultaExamesModel) {
+        return exameDAO.listarExames(
+        		consultaExamesModel.getPaginaAtual(), 
+        		consultaExamesModel.getRegistrosPorPagina(), 
+        		consultaExamesModel.getNm_exame() , 
+        		consultaExamesModel.getCd_exame(), 
+        		consultaExamesModel.getIc_ativoValue());
     }
 
-    public int getTotalPaginas(int registrosPorPagina) {
-        int totalRegistros = exameDAO.contarExames();
+    public int getTotalPaginas(ConsultaExamesModel consultaExamesModel) {
+        int totalRegistros = exameDAO.contarExames(
+        		consultaExamesModel.getNm_exame(), 
+        		consultaExamesModel.getCd_exame(), 
+        		consultaExamesModel.getIc_ativoValue());
 
-        return (int) Math.ceil((double) totalRegistros / registrosPorPagina);
+        return (int) Math.ceil((double) totalRegistros / consultaExamesModel.getRegistrosPorPagina());
     }
 }

@@ -14,7 +14,7 @@ public class ExameDAO {
 	
 	private static final Logger logger = Logger.getLogger(ExameDAO.class.getName());
     
-    public List<Exame> listarExames(int pagina, int qtdPagina) {
+    public List<Exame> listarExames(int pagina, int qtdPagina, String nm_exame, Integer cd_exame, Boolean ic_ativo) {
     	logger.info("pagina: " + pagina);
     	logger.info("qtdPagina: " + qtdPagina);
     	
@@ -22,12 +22,20 @@ public class ExameDAO {
         PreparedStatement preparedStatement = null;
     	
     	try {
+    		StringBuilder query = new StringBuilder("SELECT cd_exame, nm_exame, ic_ativo FROM exame WHERE 1=1");
+    		
+    		List<Object> parametros = buildWhereCondition(nm_exame, cd_exame, ic_ativo, query);
+
+            query.append(" LIMIT ?, ?");
+            parametros.add((pagina - 1) * qtdPagina);
+            parametros.add(qtdPagina);
+    		
             connection = DBUtil.getConnection();            
-            preparedStatement = connection.prepareStatement("SELECT * FROM exame LIMIT ?, ?");
-                        
-            int limiteInferior = (pagina - 1) * qtdPagina;
-            preparedStatement.setInt(1, limiteInferior);
-            preparedStatement.setInt(2, qtdPagina);
+            preparedStatement = connection.prepareStatement(query.toString());
+            
+            for (int i = 0; i < parametros.size(); i++) {
+                preparedStatement.setObject(i + 1, parametros.get(i));
+            }
             
             ResultSet rs = preparedStatement.executeQuery();
             
@@ -37,8 +45,6 @@ public class ExameDAO {
                 exame.setCdExame(rs.getInt("cd_exame"));
                 exame.setNmExame(rs.getString("nm_exame"));
                 exame.setIcAtivo(rs.getBoolean("ic_ativo"));
-                exame.setDsDetalheExame(rs.getString("ds_detalhe_exame"));
-                exame.setDsDetalheExame1(rs.getString("ds_detalhe_exame1"));
                 exames.add(exame);
             }
             
@@ -55,14 +61,41 @@ public class ExameDAO {
             }
         }
     }
+
+	private List<Object> buildWhereCondition(String nm_exame, Integer cd_exame, Boolean ic_ativo, StringBuilder query) {
+		List<Object> parametros = new ArrayList<>();
+		
+		if (nm_exame != null && !nm_exame.isEmpty()) {
+		    query.append(" AND nm_exame LIKE ?");
+		    parametros.add("%" + nm_exame.toUpperCase().trim() + "%");
+		}
+
+		if (cd_exame != null && cd_exame > 0) {
+		    query.append(" AND cd_exame = ?");
+		    parametros.add(cd_exame);
+		}
+
+		if (ic_ativo != null) {
+		    query.append(" AND ic_ativo = ?");
+		    parametros.add(ic_ativo);
+		}
+		return parametros;
+	}
     
-    public int contarExames() {
+    public int contarExames(String nm_exame, Integer cd_exame, Boolean ic_ativo) {
         Connection connection = null;
         PreparedStatement preparedStatement = null;
 
         try {
+            StringBuilder query = new StringBuilder("SELECT COUNT(cd_exame) FROM exame WHERE 1=1");
+            List<Object> parametros = buildWhereCondition(nm_exame, cd_exame, ic_ativo, query);
+            
             connection = DBUtil.getConnection();
-            preparedStatement = connection.prepareStatement("SELECT COUNT(*) FROM exame");
+            preparedStatement = connection.prepareStatement(query.toString());
+            
+            for (int i = 0; i < parametros.size(); i++) {
+                preparedStatement.setObject(i + 1, parametros.get(i));
+            }
 
             ResultSet rs = preparedStatement.executeQuery();
             rs.next();

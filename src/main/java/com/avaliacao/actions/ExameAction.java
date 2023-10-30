@@ -24,11 +24,25 @@ public class ExameAction extends ActionSupport {
         this.consultaExamesModel.setPaginaAtual(pagina);
     }
     
+    public void setCodigo(int codigo) {
+    	this.consultaExamesModel.setCd_exame(codigo);
+    }
+    
+    public void setNome(String nome) {
+    	this.consultaExamesModel.setNm_exame(nome);
+    }
+    
+    public void setAtivo(String ativo) {
+    	if (ativo != null) {
+    		this.consultaExamesModel.setIc_ativo(ativo.toLowerCase());
+    	}
+    }
+    
 
     public ExameAction() {
         exameFacade = new ExameFacade();
         consultaExamesModel = new ConsultaExamesModel();
-        consultaExamesModel.setTotalPaginas(exameFacade.getTotalPaginas(consultaExamesModel.getRegistrosPorPagina()));
+        consultaExamesModel.setTotalPaginas(exameFacade.getTotalPaginas(consultaExamesModel));
     }
     
     public String list() {
@@ -37,9 +51,9 @@ public class ExameAction extends ActionSupport {
     	return SUCCESS;
     }
 
-    private void executarConsulta() {
-        listaExames = exameFacade.getListaExamesPaginada(consultaExamesModel.getPaginaAtual(), consultaExamesModel.getRegistrosPorPagina());
-        consultaExamesModel.setTotalPaginas(exameFacade.getTotalPaginas(consultaExamesModel.getRegistrosPorPagina()));
+    private void executarConsulta() {    	
+        listaExames = exameFacade.getListaExamesPaginada(consultaExamesModel);
+        consultaExamesModel.setTotalPaginas(exameFacade.getTotalPaginas(consultaExamesModel));
     }
 
     public List<Exame> getListaExames() {
