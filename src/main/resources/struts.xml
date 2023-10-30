@@ -43,4 +43,11 @@
             <result name="error">/views/auth/login.jsp</result>
         </action>
     </package>
+    
+    <package name="exames" namespace="/exames" extends="struts-default">
+		<default-action-ref name="index" />
+        <action name="index" class="com.avaliacao.actions.ExameAction" method="execute">			
+            <result name="success">/views/exames/consulta.jsp</result>            
+        </action>
+    </package>
 </struts>

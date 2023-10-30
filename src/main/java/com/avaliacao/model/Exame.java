@@ -1,31 +1,49 @@
 package com.avaliacao.model;
 
 public class Exame {
-    private int id;
-    private String nome;
-    private boolean ativo;
+    private int cdExame;
+    private String nmExame;
+    private boolean icAtivo;
+    private String dsDetalheExame;
+    private String dsDetalheExame1;
 
-    public int getId() {
-        return id;
+    public int getCdExame() {
+        return cdExame;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setCdExame(int cdExame) {
+        this.cdExame = cdExame;
     }
 
-    public String getNome() {
-        return nome;
+    public String getNmExame() {
+        return nmExame;
     }
 
-    public void setNome(String nome) {
-        this.nome = nome;
+    public void setNmExame(String nmExame) {
+        this.nmExame = nmExame;
     }
 
-    public boolean isAtivo() {
-        return ativo;
+    public boolean isIcAtivo() {
+        return icAtivo;
     }
 
-    public void setAtivo(boolean ativo) {
-        this.ativo = ativo;
+    public void setIcAtivo(boolean icAtivo) {
+        this.icAtivo = icAtivo;
+    }
+
+    public String getDsDetalheExame() {
+        return dsDetalheExame;
+    }
+
+    public void setDsDetalheExame(String dsDetalheExame) {
+        this.dsDetalheExame = dsDetalheExame;
+    }
+
+    public String getDsDetalheExame1() {
+        return dsDetalheExame1;
+    }
+
+    public void setDsDetalheExame1(String dsDetalheExame1) {
+        this.dsDetalheExame1 = dsDetalheExame1;
     }
 }
