@@ -8,7 +8,7 @@ import com.avaliacao.facade.ExameFacade;
 import com.avaliacao.model.ConsultaExamesModel;
 import com.avaliacao.model.Exame;
 
-public class ExameAction extends ActionSupport {
+public class ConsultaExamesAction extends ActionSupport {
     private static final long serialVersionUID = 1L;
 
     private ExameFacade exameFacade;
@@ -39,7 +39,7 @@ public class ExameAction extends ActionSupport {
     }
     
 
-    public ExameAction() {
+    public ConsultaExamesAction() {
         exameFacade = new ExameFacade();
         consultaExamesModel = new ConsultaExamesModel();
         consultaExamesModel.setTotalPaginas(exameFacade.getTotalPaginas(consultaExamesModel));

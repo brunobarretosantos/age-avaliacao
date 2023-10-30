@@ -10,7 +10,7 @@
 </head>
 <body>
 	<script>
-        function consultarExames(pagina) {
+        function consulta(pagina) {
             var queryParams = "";
 
             var codigo = document.getElementById("codigo").value;
@@ -27,7 +27,7 @@
                 queryParams += "&ativo=" + ativo;
             }
 
-            window.location.href = "consultarExames?pagina=" + pagina + queryParams;
+            window.location.href = "consulta?pagina=" + pagina + queryParams;
         }
         
         function limparCampos() {
@@ -35,7 +35,7 @@
             document.getElementById('nome').value = '';
             document.getElementById('ativo').value = 'todos';
             
-            window.location.href = "consultarExames?"
+            window.location.href = "consulta?"
         }
 
     </script>
@@ -59,7 +59,7 @@
 			    </s:select>
 			</div>
 
-	        <button type="button" class="btn btn-primary mr-3" onclick="consultarExames(1)">Pesquisar</button>
+	        <button type="button" class="btn btn-primary mr-3" onclick="consulta(1)">Pesquisar</button>
 	        <button type="button" class="btn btn-secondary" onclick="limparCampos()">Limpar</button>
 	    </form>
 	    
@@ -85,7 +85,7 @@
 		    <ul class="pagination">
 		        <li class="page-item">
 		            <s:if test="consultaExamesModel.paginaAtual > 1">
-		                <button class="page-link" onclick="consultarExames(1)" aria-label="Previous">
+		                <button class="page-link" onclick="consulta(1)" aria-label="Previous">
 						    <span aria-hidden="true">«« Primeira</span>
 						</button>
 		            </s:if>
@@ -93,7 +93,7 @@
 		       		 
 		        <li class="page-item">
 		            <s:if test="consultaExamesModel.paginaAtual > 1">
-		                <button class="page-link" onclick="consultarExames(${consultaExamesModel.paginaAtual - 1})" aria-label="Previous">
+		                <button class="page-link" onclick="consulta(${consultaExamesModel.paginaAtual - 1})" aria-label="Previous">
 						    <span aria-hidden="true">&laquo; Anterior</span>
 						</button>
 		            </s:if>
@@ -106,7 +106,7 @@
 		                    <span class="page-link active">${i}</span>
 		                </s:if>
 		                <s:else>
-			                <button class="page-link" onclick="consultarExames(${i})" aria-label="Previous">
+			                <button class="page-link" onclick="consulta(${i})" aria-label="Previous">
 			                	${i}
 							</button>		                    
 		                </s:else>
@@ -115,7 +115,7 @@
 		
 		        <li class="page-item">
 		            <s:if test="consultaExamesModel.paginaAtual < consultaExamesModel.totalPaginas">
-		                <button class="page-link" onclick="consultarExames(${consultaExamesModel.paginaAtual + 1})" aria-label="Previous">
+		                <button class="page-link" onclick="consulta(${consultaExamesModel.paginaAtual + 1})" aria-label="Previous">
 						    <span aria-hidden="true">Próxima &raquo;</span>
 						</button>
 		            </s:if>
@@ -123,7 +123,7 @@
 		        
 		        <li class="page-item">
 		            <s:if test="consultaExamesModel.paginaAtual < consultaExamesModel.totalPaginas">		                
-		                <button class="page-link" onclick="consultarExames(${consultaExamesModel.totalPaginas})" aria-label="Previous">
+		                <button class="page-link" onclick="consulta(${consultaExamesModel.totalPaginas})" aria-label="Previous">
 						    <span aria-hidden="true">Última »»</span>
 						</button>
 		            </s:if>
