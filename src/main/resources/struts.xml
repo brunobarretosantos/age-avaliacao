@@ -58,5 +58,10 @@
             <result name="success">/views/exames/cadastro.jsp</result>
             <result name="error">/views/exames/cadastro.jsp</result>
         </action>
+        
+        <action name="excluir" class="com.avaliacao.actions.exames.CadastroAction" method="excluir">			            
+            <result name="success" type="redirect">/exames/consulta</result>
+            <result name="error">/views/exames/cadastro.jsp</result>
+        </action>
     </package>
 </struts>

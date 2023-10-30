@@ -93,4 +93,21 @@ public class CadastroAction extends ActionSupport {
     	addActionError("Ocorreu um erro inesperado");
 		return ERROR;
     }
+    
+    public String excluir() {
+    	logger.info("CadastroAction.excluir.id: " + id);
+        if (id > 0) {
+            boolean sucesso = exameFacade.excluirExame(id);
+
+            if (sucesso) {
+                addActionMessage("Exame excluído com sucesso.");
+            } else {
+                addActionError("Não foi possível excluir o exame.");
+                return ERROR;
+            }
+        }
+
+        return SUCCESS;
+    }
+
 }

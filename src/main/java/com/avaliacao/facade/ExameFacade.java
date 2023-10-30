@@ -35,7 +35,7 @@ public class ExameFacade {
     	int id = exameDAO.incluirExame(exame);
     	
     	if (id > 0) {
-    		return exameDAO.getExameById(id);
+    		return carregarExame(id);
     	}
     	
     	return null;
@@ -48,5 +48,15 @@ public class ExameFacade {
     public Exame carregarExame(int id) {
         return exameDAO.getExameById(id);
     }
+    
+    public boolean excluirExame(int id) {
+        try {
+            return exameDAO.excluirExame(id);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
 
 }

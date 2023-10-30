@@ -7,6 +7,8 @@
     <title><s:if test="id > 0">Edição de Exame</s:if><s:else>Cadastro de Exame</s:else></title>
     <link rel="stylesheet" href="/context-path/static/css/custom-styles.css">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@12.6.10/dist/sweetalert2.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>	
 </head>
 <body>
 	<script>
@@ -15,14 +17,32 @@
 		}
 		
 		document.addEventListener('DOMContentLoaded', function() {
-	        var mensagemElement = document.getElementById('mensagem');
-	        if (mensagemElement) {
-	            mensagemElement.style.display = 'block';
-	            setTimeout(function() {
-	                mensagemElement.style.display = 'none';
-	            }, 5000);
-	        }
-	    });
+		    var mensagemElement = document.getElementById('mensagem');
+		    if (mensagemElement) {
+		        mensagemElement.style.display = 'block';
+		        setTimeout(function() {
+		            mensagemElement.style.display = 'none';
+		        }, 5000);
+		    }
+		});
+
+		function excluirExame(id) {
+		    console.log(id);
+		    Swal.fire({
+		        title: 'Tem certeza?',
+		        text: 'Esta ação não poderá ser desfeita.',
+		        icon: 'warning',
+		        showCancelButton: true,
+		        confirmButtonColor: '#d33',
+		        cancelButtonColor: '#3085d6',
+		        confirmButtonText: 'Sim, excluir'
+		    }).then((result) => {
+		        if (result.isConfirmed) {
+		            window.location.href = 'excluir?id=' + id;
+		        }
+		    });
+		}
+
 	</script>
     <div class="container d-flex justify-content-center align-items-center vh-100">
         <div class="card p-4 w-100">
@@ -66,6 +86,10 @@
 				    </div>
 				</s:if>				
                 <button type="submit" class="btn btn-primary"><s:if test="id > 0">Salvar Alterações</s:if><s:else>Cadastrar</s:else></button>
+                <s:if test="id > 0">
+				    <button type="button" class="btn btn-danger" onclick="excluirExame(${exame.cdExame})">Excluir</button>
+				</s:if>
+				                
             </form>
         </div>
     </div>
@@ -73,5 +97,6 @@
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </body>
 </html>
