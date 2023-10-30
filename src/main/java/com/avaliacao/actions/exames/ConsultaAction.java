@@ -1,4 +1,4 @@
-package com.avaliacao.actions;
+package com.avaliacao.actions.exames;
 
 import com.opensymphony.xwork2.ActionSupport;
 
@@ -8,13 +8,18 @@ import com.avaliacao.facade.ExameFacade;
 import com.avaliacao.model.ConsultaExamesModel;
 import com.avaliacao.model.Exame;
 
-public class ConsultaExamesAction extends ActionSupport {
+public class ConsultaAction extends ActionSupport {
     private static final long serialVersionUID = 1L;
 
     private ExameFacade exameFacade;
-    private List<Exame> listaExames;
-    
+    private List<Exame> listaExames;    
     private ConsultaExamesModel consultaExamesModel;
+    
+    public ConsultaAction() {
+        exameFacade = new ExameFacade();
+        consultaExamesModel = new ConsultaExamesModel();
+        consultaExamesModel.setTotalPaginas(exameFacade.getTotalPaginas(consultaExamesModel));
+    }
     
     public ConsultaExamesModel getConsultaExamesModel() {
         return consultaExamesModel;
@@ -36,19 +41,6 @@ public class ConsultaExamesAction extends ActionSupport {
     	if (ativo != null) {
     		this.consultaExamesModel.setIc_ativo(ativo.toLowerCase());
     	}
-    }
-    
-
-    public ConsultaExamesAction() {
-        exameFacade = new ExameFacade();
-        consultaExamesModel = new ConsultaExamesModel();
-        consultaExamesModel.setTotalPaginas(exameFacade.getTotalPaginas(consultaExamesModel));
-    }
-    
-    public String list() {
-    	executarConsulta();
-    			
-    	return SUCCESS;
     }
 
     private void executarConsulta() {    	

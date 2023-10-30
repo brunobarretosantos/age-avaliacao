@@ -46,7 +46,7 @@
     
     <package name="exames" namespace="/exames" extends="struts-default">
 		<default-action-ref name="index" />
-        <action name="index" class="com.avaliacao.actions.ConsultaExamesAction" method="execute">			
+        <action name="index" class="com.avaliacao.actions.exames.ConsultaAction" method="execute">			
             <result name="success">/views/exames/consulta.jsp</result>            
         </action>
     </package>

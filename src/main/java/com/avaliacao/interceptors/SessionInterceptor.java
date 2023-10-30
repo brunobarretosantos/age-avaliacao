@@ -1,7 +1,6 @@
 package com.avaliacao.interceptors;
 
 import com.avaliacao.dao.UsuarioDAO;
-import com.avaliacao.services.UsuarioService;
 import com.opensymphony.xwork2.Action;
 import com.opensymphony.xwork2.ActionInvocation;
 import com.opensymphony.xwork2.interceptor.AbstractInterceptor;
