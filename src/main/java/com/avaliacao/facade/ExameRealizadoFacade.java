@@ -6,9 +6,11 @@ import com.avaliacao.model.ExameRealizado;
 import com.avaliacao.model.RelatorioExamesRealizadosModel;
 
 import java.util.List;
+import java.util.logging.Logger;
 
 public class ExameRealizadoFacade {
     private ExameRealizadoDAO exameRealizadoDAO;
+    private static final Logger logger = Logger.getLogger(ExameRealizadoFacade.class.getName());
 
     public ExameRealizadoFacade() {
         exameRealizadoDAO = new ExameRealizadoDAO();
@@ -31,6 +33,9 @@ public class ExameRealizadoFacade {
     }
     
     public List<ExameRealizado> getListaExamesRealizadosPaginada(RelatorioExamesRealizadosModel model) {
+    	logger.info("model.getPaginaAtual(): " + model.getPaginaAtual());
+    	logger.info("model.getRegistrosPorPagina(): " + model.getRegistrosPorPagina());
+    	
         return exameRealizadoDAO.listarExamesPorData(
         		model.getPaginaAtual(),
         		model.getRegistrosPorPagina(),

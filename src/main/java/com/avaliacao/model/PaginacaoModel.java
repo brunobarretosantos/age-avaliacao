@@ -1,7 +1,7 @@
 package com.avaliacao.model;
 
-public class PaginacaoModel {
-    private int paginaAtual = 1;
+public class PaginacaoModel {	
+	private int paginaAtual = 1;
     private int totalPaginas;
     private int registrosPorPagina = 10;
     private int primeiraPagina;
@@ -11,16 +11,6 @@ public class PaginacaoModel {
     }
 
     public void setPaginaAtual(int paginaAtual) {
-        if (this.totalPaginas == 0) {
-        	this.paginaAtual = 1;
-        	return;
-        }
-    	
-    	if (paginaAtual > this.totalPaginas) {
-            this.paginaAtual = this.totalPaginas;
-            return;
-        }
-
         if (paginaAtual < 1) {
             this.paginaAtual = 1;
             return;

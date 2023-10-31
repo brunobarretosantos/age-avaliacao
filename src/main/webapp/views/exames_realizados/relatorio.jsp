@@ -18,6 +18,7 @@
 
             var dtInicio = document.getElementById("dtInicio").value;
             var dtFim = document.getElementById("dtFim").value;
+            var registrosPorPagina = document.getElementById("registrosPorPagina").value;
 
             if (dtInicio) {
                 queryParams += "&dtInicio=" + dtInicio;
@@ -25,6 +26,10 @@
             
             if (dtFim) {
                 queryParams += "&dtFim=" + dtFim.trim();
+            }
+            
+            if (registrosPorPagina) {
+                queryParams += "&qtdPagina=" + registrosPorPagina.trim();
             }
             
             if (!dtInicio || !dtFim) {
@@ -53,13 +58,18 @@
         <form class="form-inline mb-3 mt-3">
         	<div class="form-group mr-3">
                 <label for="dtInicio" class="mr-2">Início:</label>
-                <s:textfield name="relatorioExamesRealizadosModel.dtInicio" id="dtInicio" cssClass="form-control" />
+                <s:textfield name="relatorioExamesRealizadosModel.dtInicio" id="dtInicio" class="form-control" />
             </div>
             
             <div class="form-group mr-3">
                 <label for="dtFim" class="mr-2">Fim:</label>
-                <s:textfield name="relatorioExamesRealizadosModel.dtFim" id="dtFim" cssClass="form-control" />
-            </div>       
+                <s:textfield name="relatorioExamesRealizadosModel.dtFim" id="dtFim" class="form-control" />
+            </div>
+            
+            <div class="form-group mr-3">
+                <label for="registrosPorPagina" class="mr-2">Qtd por Página:</label>
+                <s:select class="form-control" id="registrosPorPagina" name="relatorioExamesRealizadosModel.registrosPorPagina" list="#{'5':'5', '10':'10', '25':'25', '50':'50'}" value="relatorioExamesRealizadosModel.registrosPorPagina" />
+            </div>
 
             <button type="button" class="btn btn-primary mr-3" onclick="consulta(1)">Pesquisar</button>
             <button type="button" class="btn btn-secondary mr-3" onclick="limparCampos()">Limpar</button>

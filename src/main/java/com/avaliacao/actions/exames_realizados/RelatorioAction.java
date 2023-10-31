@@ -37,7 +37,11 @@ public class RelatorioAction extends ActionSupport {
     
     public void setDtFim(Date dtFim) {
     	this.relatorioExamesRealizadosModel.setDtFim(dtFim);
-    }    
+    }
+    
+    public void setQtdPagina(int qtdPagina) {
+    	this.relatorioExamesRealizadosModel.setRegistrosPorPagina(qtdPagina);
+    }
 
     private void executarConsulta() {
     	logger.info("RelatorioAction.executarConsulta");
