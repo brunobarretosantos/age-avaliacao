@@ -26,6 +26,10 @@
             if (dtFim) {
                 queryParams += "&dtFim=" + dtFim.trim();
             }
+            
+            if (!dtInicio || !dtFim) {
+            	return;
+            }
 
             window.location.href = "relatorio?pagina=" + pagina + queryParams;
         }
