@@ -1,5 +1,8 @@
 package com.avaliacao.dao;
 
+import com.avaliacao.model.Usuario;
+import com.avaliacao.util.DBUtil;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -8,14 +11,11 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Logger;
 
-import com.avaliacao.model.Usuario;
-import com.avaliacao.util.DBUtil;
-
 public class UsuarioDAO {
-	
-	private static final Logger logger = Logger.getLogger(UsuarioDAO.class.getName());
 
-    public List<Usuario> listarUsuarios() {
+    private static final Logger logger = Logger.getLogger(UsuarioDAO.class.getName());
+
+    public List<Usuario> listarUsuarios(int pagina, int qtdPagina, String nmLogin, String nmRole) {
         List<Usuario> usuarios = new ArrayList<>();
         Connection connection = null;
         PreparedStatement preparedStatement = null;
@@ -23,28 +23,60 @@ public class UsuarioDAO {
 
         try {
             connection = DBUtil.getConnection();
-            String query = "SELECT * FROM usuario";
-            preparedStatement = connection.prepareStatement(query);
+
+            StringBuilder query = new StringBuilder("SELECT * FROM usuario WHERE 1=1");
+
+            List<Object> parametros = buildWhereCondition(nmLogin, nmRole, query);
+
+            query.append(" LIMIT ?, ?");
+            parametros.add((pagina - 1) * qtdPagina);
+            parametros.add(qtdPagina);
+
+            preparedStatement = connection.prepareStatement(query.toString());
+
+            for (int i = 0; i < parametros.size(); i++) {
+                preparedStatement.setObject(i + 1, parametros.get(i));
+            }
+
             resultSet = preparedStatement.executeQuery();
 
             while (resultSet.next()) {
                 Usuario usuario = new Usuario();
                 usuario.setNmLogin(resultSet.getString("nm_login"));
-                usuario.setDsSenha(resultSet.getString("ds_senha"));
                 usuario.setQtTempoInatividade(resultSet.getInt("qt_tempo_inatividade"));
                 usuario.setNmRole(resultSet.getString("nm_role"));
+                usuario.setIsPasswordEncripted(true);
                 usuarios.add(usuario);
             }
 
-            connection.close();
-
         } catch (Exception e) {
             e.printStackTrace();
-        }
+        } finally {
+	        try {
+	            if (preparedStatement != null) preparedStatement.close();
+	            if (connection != null) connection.close();
+	        } catch (Exception e) {
+	            e.printStackTrace();
+	        }
+	    }
 
         return usuarios;
     }
 
+	private List<Object> buildWhereCondition(String nmLogin, String nmRole, StringBuilder query) {
+		List<Object> parametros = new ArrayList<>();
+		if (nmLogin != null && !nmLogin.isEmpty()) {
+		    query.append(" AND nm_login LIKE ?");
+		    parametros.add("%" + nmLogin.toLowerCase() + "%");
+		}
+
+		if (nmRole != null && !nmRole.isEmpty()) {
+		    query.append(" AND nm_role = ?");
+		    parametros.add(nmRole);
+		}
+		return parametros;
+	}
+    
     public boolean hasUsuarios() {
         Connection connection = null;
         PreparedStatement preparedStatement = null;
@@ -71,6 +103,40 @@ public class UsuarioDAO {
 
         return false;
     }
+    
+    public int contarUsuarios(String nmLogin, String nmRole) {
+        Connection connection = null;
+        PreparedStatement preparedStatement = null;
+
+        try {
+            StringBuilder query = new StringBuilder("SELECT COUNT(nm_login) FROM usuario WHERE 1=1");
+
+            List<Object> parametros = buildWhereCondition(nmLogin, nmRole, query);
+
+            connection = DBUtil.getConnection();
+            preparedStatement = connection.prepareStatement(query.toString());
+
+            for (int i = 0; i < parametros.size(); i++) {
+                preparedStatement.setObject(i + 1, parametros.get(i));
+            }
+
+            ResultSet rs = preparedStatement.executeQuery();
+            rs.next();
+
+            return rs.getInt(1);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return 0;
+        } finally {
+            try {
+                if (preparedStatement != null) preparedStatement.close();
+                if (connection != null) connection.close();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
     
     public void inserirUsuario(Usuario usuario) {
     	logger.info("inserirUsuario");
@@ -128,5 +194,60 @@ public class UsuarioDAO {
         }
         
         return usuario;
+    }
+
+    public boolean alterarUsuario(Usuario usuario) {
+        Connection connection = null;
+        PreparedStatement preparedStatement = null;
+
+        try {
+            connection = DBUtil.getConnection();
+            preparedStatement = connection.prepareStatement(
+                    "UPDATE usuario SET ds_senha=?, qt_tempo_inatividade=?, nm_role=? WHERE nm_login=?");
+
+            preparedStatement.setString(1, usuario.getEncryptedPassword());
+            preparedStatement.setInt(2, usuario.getQtTempoInatividade());
+            preparedStatement.setString(3, usuario.getNmRole());
+            preparedStatement.setString(4, usuario.getNmLogin());
+
+            int rowsAffected = preparedStatement.executeUpdate();
+            return rowsAffected > 0;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        } finally {
+	        try {
+	            if (preparedStatement != null) preparedStatement.close();
+	            if (connection != null) connection.close();
+	        } catch (Exception e) {
+	            e.printStackTrace();
+	        }
+	    }
+    }
+
+    public boolean excluirUsuario(String nmLogin) {
+        Connection connection = null;
+        PreparedStatement preparedStatement = null;
+
+        try {
+            connection = DBUtil.getConnection();
+            preparedStatement = connection.prepareStatement("DELETE FROM usuario WHERE nm_login = ?");
+            preparedStatement.setString(1, nmLogin);
+
+            int rowsAffected = preparedStatement.executeUpdate();
+
+            return rowsAffected > 0;
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+	        try {
+	            if (preparedStatement != null) preparedStatement.close();
+	            if (connection != null) connection.close();
+	        } catch (Exception e) {
+	            e.printStackTrace();
+	        }
+	    }
+
+        return false;
     }
 }

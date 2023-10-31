@@ -1,7 +1,7 @@
 <!DOCTYPE struts PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 2.5//EN" "http://struts.apache.org/dtds/struts-2.5.dtd">
 <struts>
 	<constant name="struts.devMode" value="true" />
-	<constant name="struts.i18n.encoding" value="UTF-8" />	
+	<constant name="struts.i18n.encoding" value="UTF-8" />
     
     <package name="default" namespace="/" extends="struts-default">
 		
@@ -46,20 +46,20 @@
     
     <package name="exames" namespace="/exames" extends="struts-default">
 		<default-action-ref name="index" />
-        <action name="index" class="com.avaliacao.actions.exames.ConsultaAction" method="execute">			
-            <result name="success">/views/exames/consulta.jsp</result>            
+        <action name="index" class="com.avaliacao.actions.exames.ConsultaAction" method="execute">
+            <result name="success">/views/exames/consulta.jsp</result>
         </action>
         
-        <action name="cadastro" class="com.avaliacao.actions.exames.CadastroAction" method="cadastro">			
-            <result name="input">/views/exames/cadastro.jsp</result>            
+        <action name="cadastro" class="com.avaliacao.actions.exames.CadastroAction" method="cadastro">
+            <result name="input">/views/exames/cadastro.jsp</result>
         </action>
         
-        <action name="executeCadastro" class="com.avaliacao.actions.exames.CadastroAction" method="execute">			
+        <action name="executeCadastro" class="com.avaliacao.actions.exames.CadastroAction" method="execute">
             <result name="success">/views/exames/cadastro.jsp</result>
             <result name="error">/views/exames/cadastro.jsp</result>
         </action>
         
-        <action name="excluir" class="com.avaliacao.actions.exames.CadastroAction" method="excluir">			            
+        <action name="excluir" class="com.avaliacao.actions.exames.CadastroAction" method="excluir">
             <result name="success" type="redirect">/exames/consulta</result>
             <result name="error">/views/exames/cadastro.jsp</result>
         </action>
@@ -69,11 +69,11 @@
 	    <default-action-ref name="index" />
 	    
 	    <action name="index" class="com.avaliacao.actions.funcionarios.ConsultaAction" method="execute">			
-	        <result name="success">/views/funcionarios/consulta.jsp</result>            
+	        <result name="success">/views/funcionarios/consulta.jsp</result>
 	    </action>
 	    
 	    <action name="cadastro" class="com.avaliacao.actions.funcionarios.CadastroAction" method="cadastro">			
-	        <result name="input">/views/funcionarios/cadastro.jsp</result>            
+	        <result name="input">/views/funcionarios/cadastro.jsp</result>
 	    </action>
 	    
 	    <action name="executeCadastro" class="com.avaliacao.actions.funcionarios.CadastroAction" method="execute">			
@@ -90,11 +90,11 @@
 	<package name="exames_realizados" namespace="/exames-realizados" extends="struts-default">
 		<default-action-ref name="index" />
         <action name="index" class="com.avaliacao.actions.exames_realizados.ConsultaAction" method="execute">			
-            <result name="success">/views/exames_realizados/consulta.jsp</result>            
+            <result name="success">/views/exames_realizados/consulta.jsp</result>
         </action>
         
         <action name="cadastro" class="com.avaliacao.actions.exames_realizados.CadastroAction" method="cadastro">			
-	        <result name="input">/views/exames_realizados/cadastro.jsp</result>            
+	        <result name="input">/views/exames_realizados/cadastro.jsp</result>
 	    </action>
 	    
 	    <action name="executeCadastro" class="com.avaliacao.actions.exames_realizados.CadastroAction" method="execute">			
@@ -102,5 +102,12 @@
 	        <result name="error">/views/exames_realizados/cadastro.jsp</result>
 	    </action>
     </package>
-
+    
+    <package name="usuarios" namespace="/usuarios" extends="struts-default">
+	    <default-action-ref name="index" />
+	    
+	    <action name="index" class="com.avaliacao.actions.usuarios.ConsultaAction" method="execute">			
+	        <result name="success">/views/usuarios/consulta.jsp</result>
+	    </action>	    
+	</package>
 </struts>
