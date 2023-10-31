@@ -32,7 +32,7 @@
                 <s:select name="exameRealizado.cd_exame" list="listaExames" listKey="cdExame" listValue="nmExame" cssClass="form-control" />
             </div>
 
-            <div class="form-group">
+            <div class="form-group w-25">
                 <label for="data">Data:</label>
                 <s:textfield name="exameRealizado.dt_realizacao" id="dt_realizacao" cssClass="form-control" />
             </div>

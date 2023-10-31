@@ -3,6 +3,7 @@ package com.avaliacao.dao;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLIntegrityConstraintViolationException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -96,6 +97,10 @@ public class ExameRealizadoDAO {
             int rowsInserted = preparedStatement.executeUpdate();            
             
             return rowsInserted;
+        } catch (SQLIntegrityConstraintViolationException e) {
+        	if (e.getMessage().contains("Duplicate entry")) {
+        		throw new IllegalArgumentException("Este exame já está cadastrado para este funcionário nesta data");
+        	}
         } catch (Exception e) {
             e.printStackTrace();
             return -1;
@@ -107,6 +112,8 @@ public class ExameRealizadoDAO {
                 e.printStackTrace();
             }
         }
+		
+        return -1;
     }
 
 }

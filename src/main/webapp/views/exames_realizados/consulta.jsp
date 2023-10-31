@@ -60,7 +60,9 @@
         <table class="table">
             <thead>
                 <tr>
+                	<th>Id Funcionário</th>
                     <th>Funcionário</th>
+                    <th>Id Exame</th>
                     <th>Nome do Exame</th>
                     <th>Data</th>
                 </tr>
@@ -68,7 +70,9 @@
             <tbody>
                 <s:iterator value="listaExamesRealizados">
                     <tr>
+                    	<td><s:property value="cd_funcionario" /></td>
 		                <td><s:property value="nm_funcionario" /></td>
+		                <td><s:property value="cd_exame" /></td>
 		                <td><s:property value="nm_exame" /></td>
 		                <td><s:date name="dt_realizacao" format="dd/MM/yyyy" /></td>
 		            </tr>
