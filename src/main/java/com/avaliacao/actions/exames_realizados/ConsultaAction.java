@@ -29,12 +29,12 @@ public class ConsultaAction extends ActionSupport {
         this.consultaExamesRealizadosModel.setPaginaAtual(pagina);
     }
     
-    public void setCodigo(int codigo) {
-    	this.consultaExamesRealizadosModel.setCd_exame(codigo);
+    public void setExame(String exame) {
+    	this.consultaExamesRealizadosModel.setNm_exame(exame);
     }
     
-    public void setNome(String nome) {
-    	this.consultaExamesRealizadosModel.setNm_exame(nome);
+    public void setFuncionario(String functionario) {
+    	this.consultaExamesRealizadosModel.setNm_funcionario(functionario);
     }    
 
     private void executarConsulta() {    	

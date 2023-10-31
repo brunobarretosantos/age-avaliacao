@@ -21,7 +21,7 @@
             }
             
             if (exame) {
-                queryParams += "&exame=" + nome.trim();
+                queryParams += "&exame=" + exame.trim();
             }
 
             window.location.href = "consulta?pagina=" + pagina + queryParams;
@@ -44,11 +44,11 @@
 
         <form class="form-inline mb-3 mt-3">
             <div class="form-group mr-3">
-                <label for="codigo" class="mr-2">Funcionário:</label>
+                <label for="codigo" class="mr-2">Exame:</label>
                 <s:textfield name="exame" id="exame" class="form-control" value="%{consultaExamesRealizadosModel.nm_exame}" />
             </div>
             <div class="form-group mr-3">
-                <label for="nome" class="mr-2">Exame:</label>
+                <label for="nome" class="mr-2">Funcionário:</label>
                 <s:textfield name="funcionario" id="funcionario" class="form-control" value="%{consultaExamesRealizadosModel.nm_funcionario}" />
             </div>
 

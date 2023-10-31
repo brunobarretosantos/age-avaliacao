@@ -11,8 +11,9 @@ import com.avaliacao.model.ExameRealizado;
 import com.avaliacao.util.DBUtil;
 
 public class ExameRealizadoDAO {
-    
-    public List<ExameRealizado> listarExamesRealizados(int pagina, int qtdPagina) {
+	
+	    
+    public List<ExameRealizado> listarExamesRealizados(int pagina, int qtdPagina, String nmExame, String nmFuncionario) {
         Connection connection = null;
         PreparedStatement preparedStatement = null;
 
@@ -20,13 +21,20 @@ public class ExameRealizadoDAO {
             connection = DBUtil.getConnection();
             StringBuilder query = new StringBuilder("SELECT er.cd_funcionario, er.cd_exame, er.dt_realizacao, e.nm_exame, f.nm_funcionario FROM exame_realizado er");
             query.append(" JOIN exame e ON er.cd_exame = e.cd_exame");
-            query.append(" JOIN funcionario f ON er.cd_funcionario = f.cd_funcionario");            
+            query.append(" JOIN funcionario f ON er.cd_funcionario = f.cd_funcionario"); 
+            query.append(" WHERE 1=1");
+            
+            List<Object> parametros = buildWhereCondition(nmExame, nmFuncionario, query);
 
             query.append(" LIMIT ?, ?");
+            parametros.add((pagina - 1) * qtdPagina);
+            parametros.add(qtdPagina);
 
             preparedStatement = connection.prepareStatement(query.toString());            
-            preparedStatement.setInt(1, (pagina - 1) * qtdPagina);
-            preparedStatement.setInt(2, qtdPagina);
+
+            for (int i = 0; i < parametros.size(); i++) {
+                preparedStatement.setObject(i + 1, parametros.get(i));
+            }            
 
             ResultSet rs = preparedStatement.executeQuery();
 
@@ -55,15 +63,32 @@ public class ExameRealizadoDAO {
         }
     }
 
-    public int contarExamesRealizados() {
+    public int contarExamesRealizados(String nmExame, String nmFuncionario) {
         Connection connection = null;
         PreparedStatement preparedStatement = null;
 
         try {
             connection = DBUtil.getConnection();
-            StringBuilder query = new StringBuilder("SELECT COUNT(*) FROM exame_realizado");
+            
+            StringBuilder query = new StringBuilder("SELECT COUNT(*) FROM exame_realizado er");
+            
+            if (nmExame != null && !nmExame.isEmpty()) {
+            	query.append(" JOIN exame e ON er.cd_exame = e.cd_exame");
+            }
+            
+            if (nmFuncionario != null && !nmFuncionario.isEmpty()) {
+            	query.append(" JOIN funcionario f ON er.cd_funcionario = f.cd_funcionario");
+            }
+            
+            query.append(" WHERE 1=1");
+            
+            List<Object> parametros = buildWhereCondition(nmExame, nmFuncionario, query);
 
             preparedStatement = connection.prepareStatement(query.toString());
+            
+            for (int i = 0; i < parametros.size(); i++) {
+                preparedStatement.setObject(i + 1, parametros.get(i));
+            }
 
             ResultSet rs = preparedStatement.executeQuery();
             rs.next();
@@ -81,6 +106,22 @@ public class ExameRealizadoDAO {
             }
         }
     }
+    
+    private List<Object> buildWhereCondition(String nmExame, String nmFuncionario, StringBuilder query) {
+		List<Object> parametros = new ArrayList<>();
+		
+		if (nmExame != null && !nmExame.isEmpty()) {
+		    query.append(" AND e.nm_exame LIKE ?");
+		    parametros.add("%" + nmExame.toUpperCase().trim() + "%");
+		}
+
+		if (nmFuncionario != null && !nmFuncionario.isEmpty()) {
+		    query.append(" AND f.nm_funcionario LIKE ?");
+		    parametros.add("%" + nmFuncionario.toUpperCase().trim() + "%");
+		}
+		
+		return parametros;
+	}
     
     public int incluirExameRealizado(ExameRealizado exameRealizado) {
         Connection connection = null;

@@ -16,11 +16,15 @@ public class ExameRealizadoFacade {
     public List<ExameRealizado> getListaExamesRealizadosPaginada(ConsultaExamesRealizadosModel consultaExamesRealizadosModel) {
         return exameRealizadoDAO.listarExamesRealizados(
         		consultaExamesRealizadosModel.getPaginaAtual(),
-        		consultaExamesRealizadosModel.getRegistrosPorPagina());
+        		consultaExamesRealizadosModel.getRegistrosPorPagina(),
+        		consultaExamesRealizadosModel.getNm_exame(),
+        		consultaExamesRealizadosModel.getNm_funcionario());
     }
 
     public int getTotalPaginas(ConsultaExamesRealizadosModel consultaExamesRealizadosModel) {
-        int totalRegistros = exameRealizadoDAO.contarExamesRealizados();
+        int totalRegistros = exameRealizadoDAO.contarExamesRealizados(
+        		consultaExamesRealizadosModel.getNm_exame(),
+        		consultaExamesRealizadosModel.getNm_funcionario());
 
         return (int) Math.ceil((double) totalRegistros / consultaExamesRealizadosModel.getRegistrosPorPagina());
     }
