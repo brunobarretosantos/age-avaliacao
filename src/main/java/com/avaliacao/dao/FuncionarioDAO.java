@@ -92,6 +92,39 @@ public class FuncionarioDAO {
             }
         }
     }
+    
+    public List<Funcionario> listarFuncionarios() {
+        Connection connection = null;
+        PreparedStatement preparedStatement = null;
+
+        try {
+            StringBuilder query = new StringBuilder("SELECT cd_funcionario, nm_funcionario FROM funcionario ORDER BY nm_funcionario");                        
+            connection = DBUtil.getConnection();
+            preparedStatement = connection.prepareStatement(query.toString());
+
+            ResultSet rs = preparedStatement.executeQuery();
+
+            List<Funcionario> funcionarios = new ArrayList<>();
+            while (rs.next()) {
+                Funcionario funcionario = new Funcionario();
+                funcionario.setCdFuncionario(rs.getInt("cd_funcionario"));
+                funcionario.setNmFuncionario(rs.getString("nm_funcionario"));
+                funcionarios.add(funcionario);
+            }
+
+            return funcionarios;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return new ArrayList<Funcionario>();
+        } finally {
+            try {
+                if (preparedStatement != null) preparedStatement.close();
+                if (connection != null) connection.close();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+    }
 
     private List<Object> buildWhereCondition(String nm_funcionario, Integer cd_funcionario, StringBuilder query) {
         List<Object> parametros = new ArrayList<>();

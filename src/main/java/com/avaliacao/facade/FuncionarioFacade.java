@@ -20,6 +20,10 @@ public class FuncionarioFacade {
                 consultaFuncionariosModel.getNm_funcionario(),
                 consultaFuncionariosModel.getCd_funcionario());
     }
+    
+    public List<Funcionario> getListaFuncionariosOrdenada() {
+        return funcionarioDAO.listarFuncionarios();
+    }
 
     public int getTotalPaginas(ConsultaFuncionariosModel consultaFuncionariosModel) {
         int totalRegistros = funcionarioDAO.contarFuncionarios(

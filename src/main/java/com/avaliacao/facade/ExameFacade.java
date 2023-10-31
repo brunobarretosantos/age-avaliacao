@@ -21,6 +21,10 @@ public class ExameFacade {
         		consultaExamesModel.getCd_exame(), 
         		consultaExamesModel.getIc_ativoValue());
     }
+    
+    public List<Exame> getListaExamesAtivosOrdenada() {
+        return exameDAO.listarExamesAtivos();
+    }
 
     public int getTotalPaginas(ConsultaExamesModel consultaExamesModel) {
         int totalRegistros = exameDAO.contarExames(

@@ -3,7 +3,6 @@ package com.avaliacao.dao;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -88,22 +87,15 @@ public class ExameRealizadoDAO {
 
         try {
             connection = DBUtil.getConnection();
-            preparedStatement = connection.prepareStatement("INSERT INTO exame_realizado (cd_funcionario, cd_exame, dt_realizacao) VALUES (?, ?, ?)", Statement.RETURN_GENERATED_KEYS);
+            preparedStatement = connection.prepareStatement("INSERT INTO exame_realizado (cd_funcionario, cd_exame, dt_realizacao) VALUES (?, ?, ?)");
 
             preparedStatement.setInt(1, exameRealizado.getCd_funcionario());
             preparedStatement.setInt(2, exameRealizado.getCd_exame());
             preparedStatement.setDate(3, new java.sql.Date(exameRealizado.getDt_realizacao().getTime()));
 
-            int rowsInserted = preparedStatement.executeUpdate();
-
-            if (rowsInserted > 0) {
-                ResultSet generatedKeys = preparedStatement.getGeneratedKeys();
-                if (generatedKeys.next()) {
-                    return generatedKeys.getInt(1);
-                }
-            }
-
-            return -1;
+            int rowsInserted = preparedStatement.executeUpdate();            
+            
+            return rowsInserted;
         } catch (Exception e) {
             e.printStackTrace();
             return -1;

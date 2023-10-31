@@ -96,6 +96,41 @@ public class ExameDAO {
             }
         }
     }
+    
+    public List<Exame> listarExamesAtivos() {   	
+    	Connection connection = null;
+        PreparedStatement preparedStatement = null;
+    	
+    	try {
+    		StringBuilder query = new StringBuilder("SELECT cd_exame, nm_exame, ic_ativo FROM exame WHERE ic_ativo = 1 ORDER BY nm_exame");
+    		
+            connection = DBUtil.getConnection();            
+            preparedStatement = connection.prepareStatement(query.toString());
+            
+            ResultSet rs = preparedStatement.executeQuery();
+            
+            List<Exame> exames = new ArrayList<>();
+            while (rs.next()) {
+                Exame exame = new Exame();
+                exame.setCdExame(rs.getInt("cd_exame"));
+                exame.setNmExame(rs.getString("nm_exame"));
+                exame.setIcAtivo(rs.getBoolean("ic_ativo"));
+                exames.add(exame);
+            }
+            
+            return exames;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return new ArrayList<Exame>();
+        } finally {
+            try {
+                if (preparedStatement != null) preparedStatement.close();
+                if (connection != null) connection.close();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+    }
 
 	private List<Object> buildWhereCondition(String nm_exame, Integer cd_exame, Boolean ic_ativo, StringBuilder query) {
 		List<Object> parametros = new ArrayList<>();
