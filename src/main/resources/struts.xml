@@ -93,6 +93,10 @@
             <result name="success">/views/exames_realizados/consulta.jsp</result>
         </action>
         
+        <action name="relatorio" class="com.avaliacao.actions.exames_realizados.RelatorioAction" method="execute">			
+            <result name="success">/views/exames_realizados/relatorio.jsp</result>
+        </action>
+        
         <action name="cadastro" class="com.avaliacao.actions.exames_realizados.CadastroAction" method="cadastro">			
 	        <result name="input">/views/exames_realizados/cadastro.jsp</result>
 	    </action>
