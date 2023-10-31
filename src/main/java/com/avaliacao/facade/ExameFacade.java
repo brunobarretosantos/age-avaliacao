@@ -54,12 +54,7 @@ public class ExameFacade {
     }
     
     public boolean excluirExame(int id) {
-        try {
-            return exameDAO.excluirExame(id);
-        } catch (Exception e) {
-            e.printStackTrace();
-            return false;
-        }
+    	return exameDAO.excluirExame(id);
     }
 
 

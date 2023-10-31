@@ -3,6 +3,7 @@ package com.avaliacao.dao;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLIntegrityConstraintViolationException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
@@ -263,6 +264,10 @@ public class ExameDAO {
             int rowsAffected = preparedStatement.executeUpdate();
 
             return rowsAffected > 0;
+        } catch (SQLIntegrityConstraintViolationException e) {
+        	if (e.getMessage().contains("Cannot delete or update a parent row")) {
+        		throw new IllegalArgumentException("Não é possível excluir um exame que já foi utilizado");
+        	}
         } catch (Exception e) {
             e.printStackTrace();
             return false;
@@ -274,6 +279,8 @@ public class ExameDAO {
                 e.printStackTrace();
             }
         }
+        
+        return false;
     }
 
 }

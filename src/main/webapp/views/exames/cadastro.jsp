@@ -5,9 +5,12 @@
 <head>
     <meta charset="UTF-8">
     <title><s:if test="id > 0">Edição de Exame</s:if><s:else>Cadastro de Exame</s:else></title>
-    <link rel="stylesheet" href="/context-path/static/css/custom-styles.css">
+    <link rel="stylesheet" href="/avaliacao/static/css/custom-styles.css">
+    <link rel="stylesheet" href="/avaliacao/static/js/jquery-ui-1.12.1.custom/jquery-ui.css">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@12.6.10/dist/sweetalert2.min.css">
+    <script src="/avaliacao/static/js/jquery-ui-1.12.1.custom/external/jquery/jquery.js"></script>
+    <script src="/avaliacao/static/js/jquery-ui-1.12.1.custom/jquery-ui.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>	
 </head>
 <body>
@@ -92,11 +95,6 @@
 				                
             </form>
         </div>
-    </div>
-
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    </div>    
 </body>
 </html>

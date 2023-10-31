@@ -94,20 +94,33 @@ public class CadastroAction extends ActionSupport {
 		return ERROR;
     }
     
-    public String excluir() {
+    public String excluir() {    	
     	logger.info("CadastroAction.excluir.id: " + id);
-        if (id > 0) {
-            boolean sucesso = exameFacade.excluirExame(id);
+        
+    	try {
+			if (id > 0) {
+			    boolean sucesso = exameFacade.excluirExame(id);
 
-            if (sucesso) {
-                addActionMessage("Exame excluído com sucesso.");
-            } else {
-                addActionError("Não foi possível excluir o exame.");
-                return ERROR;
-            }
-        }
-
-        return SUCCESS;
+			    if (sucesso) {
+			        addActionMessage("Exame excluído com sucesso.");
+			        return SUCCESS;
+			    } else {
+			    	this.exame = exameFacade.carregarExame(id);
+			        addActionError("Não foi possível excluir o exame.");
+			        return ERROR;
+			    }
+			}
+			
+    	} catch (IllegalArgumentException e) {
+    		addActionError(e.getMessage());
+    		return ERROR;
+    		
+		} catch (Exception e) {			
+			e.printStackTrace();
+		}
+    	
+    	addActionError("Ocorreu um erro inexperado");
+        return ERROR;
     }
 
 }
