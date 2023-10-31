@@ -53,8 +53,10 @@
             <form action="executeCadastro" method="post">
                 <s:if test="cadastroUsuarioModel.loaded">
                     <div class="form-group">
-                        <label for="cadastroUsuarioModel.nmLogin">Nome de Login</label>
-                        <s:textfield class="form-control" name="cadastroUsuarioModel.nmLogin" maxlength="50" readonly="true" />
+                        <label for="cadastroUsuarioModel.nmLogin">Login:</label>
+                        <div class="form-control" style="background-color: #e9ecef; border: 1px solid #ced4da;">
+					        <s:property value="cadastroUsuarioModel.nmLogin" />
+					    </div>
                     </div>
                     <s:hidden name="cadastroUsuarioModel.nmLogin" />
                     <s:hidden name="cadastroUsuarioModel.loaded" />
@@ -92,9 +94,6 @@
                     </div>
                 </s:if>             
                 <button type="submit" class="btn btn-primary"><s:if test="cadastroUsuarioModel.loaded">Salvar Alterações</s:if><s:else>Cadastrar</s:else></button>
-                <s:if test="cadastroUsuarioModel.loaded">
-                    <button type="button" class="btn btn-danger" onclick="excluirUsuario('${cadastroUsuarioModel.nmLogin}')">Excluir</button>
-                </s:if>                
             </form>
         </div>
     </div>    

@@ -23,7 +23,7 @@
                 queryParams += "&role=" + role;
             }
 
-            window.location.href = "consultaUsuarios?pagina=" + pagina + queryParams;
+            window.location.href = "consulta?pagina=" + pagina + queryParams;
         }
 
         function limparCampos() {
@@ -66,6 +66,7 @@
                 <tr>
                     <th>Login</th>
                     <th>Role</th>
+                    <th>Tempo Inatividade</th>
                     <th>Ações</th>
                 </tr>
             </thead>
@@ -74,6 +75,7 @@
                     <tr>
                         <td><s:property value="nmLogin"/></td>
                         <td><s:property value="nmRole"/></td>
+                        <td><s:property value="qtTempoInatividade"/></td>
                         <td>
                             <button type="button" class="btn btn-info btn-sm" onclick="editarUsuario('<s:property value="nmLogin"/>')">Editar</button>
                         </td>
