@@ -138,7 +138,7 @@ public class UsuarioDAO {
     }
 
     
-    public void inserirUsuario(Usuario usuario) {
+    public boolean inserirUsuario(Usuario usuario) {
     	logger.info("inserirUsuario");
     	
     	Connection connection = null;
@@ -150,18 +150,27 @@ public class UsuarioDAO {
             statement = connection.prepareStatement(query);
                       
 
-            statement.setString(1, usuario.getNmLogin());
+            statement.setString(1, usuario.getNmLogin().toLowerCase());
             statement.setString(2, usuario.getEncryptedPassword());
             statement.setInt(3, usuario.getQtTempoInatividade());
             statement.setString(4, usuario.getNmRole());
 
-            statement.executeUpdate();
+            int rowsInserted = statement.executeUpdate();
             
-            connection.close();
+            return rowsInserted > 0;            
         } catch (Exception e) {
         	logger.info("inserirUsuario.exception");
             e.printStackTrace();
-        }
+        } finally {
+	        try {
+	            if (statement != null) statement.close();
+	            if (connection != null) connection.close();
+	        } catch (Exception e) {
+	            e.printStackTrace();
+	        }
+	    }
+        
+        return false;
     }
     
     public Usuario getByLogin(String nmLogin) {
@@ -203,12 +212,11 @@ public class UsuarioDAO {
         try {
             connection = DBUtil.getConnection();
             preparedStatement = connection.prepareStatement(
-                    "UPDATE usuario SET ds_senha=?, qt_tempo_inatividade=?, nm_role=? WHERE nm_login=?");
-
-            preparedStatement.setString(1, usuario.getEncryptedPassword());
-            preparedStatement.setInt(2, usuario.getQtTempoInatividade());
-            preparedStatement.setString(3, usuario.getNmRole());
-            preparedStatement.setString(4, usuario.getNmLogin());
+                    "UPDATE usuario SET qt_tempo_inatividade=?, nm_role=? WHERE nm_login=?");
+            
+            preparedStatement.setInt(1, usuario.getQtTempoInatividade());
+            preparedStatement.setString(2, usuario.getNmRole());
+            preparedStatement.setString(3, usuario.getNmLogin());
 
             int rowsAffected = preparedStatement.executeUpdate();
             return rowsAffected > 0;
@@ -232,7 +240,7 @@ public class UsuarioDAO {
         try {
             connection = DBUtil.getConnection();
             preparedStatement = connection.prepareStatement("DELETE FROM usuario WHERE nm_login = ?");
-            preparedStatement.setString(1, nmLogin);
+            preparedStatement.setString(1, nmLogin.toLowerCase());
 
             int rowsAffected = preparedStatement.executeUpdate();
 

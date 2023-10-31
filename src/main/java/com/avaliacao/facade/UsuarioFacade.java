@@ -1,6 +1,7 @@
 package com.avaliacao.facade;
 
 import com.avaliacao.dao.UsuarioDAO;
+import com.avaliacao.model.CadastroUsuarioModel;
 import com.avaliacao.model.ConsultaUsuariosModel;
 import com.avaliacao.model.Usuario;
 
@@ -13,8 +14,8 @@ public class UsuarioFacade {
         this.usuarioDAO = new UsuarioDAO();
     }
 
-    public void cadastrarUsuario(Usuario usuario) {
-        usuarioDAO.inserirUsuario(usuario);
+    public boolean cadastrarUsuario(CadastroUsuarioModel model) {
+        return usuarioDAO.inserirUsuario(model.makeUsuario(true));
     }
 
     public Usuario autenticar(String nmLogin, String encryptedPassword) throws Exception { 
@@ -44,8 +45,8 @@ public class UsuarioFacade {
         return (int) Math.ceil((double) totalRegistros / model.getRegistrosPorPagina());
     }
 
-    public boolean alterarUsuario(Usuario usuario) {
-        return usuarioDAO.alterarUsuario(usuario);
+    public boolean alterarUsuario(CadastroUsuarioModel model) {    	    
+        return usuarioDAO.alterarUsuario(model.makeUsuario(false));
     }
 
     public boolean excluirUsuario(String nmLogin) {
@@ -55,4 +56,8 @@ public class UsuarioFacade {
     public boolean hasUsuarios() {
         return usuarioDAO.hasUsuarios();
     }
+
+	public Usuario carregarUsuario(String nmLogin) {
+		return usuarioDAO.getByLogin(nmLogin);
+	}
 }

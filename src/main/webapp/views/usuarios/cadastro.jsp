@@ -4,44 +4,99 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>Cadastro de Usuário</title>
-    <link rel="stylesheet" href="/context-path/static/css/custom-styles.css">
+    <title><s:if test="cadastroUsuarioModel.loaded">Edição de Usuário</s:if><s:else>Cadastro de Usuário</s:else></title>
+    <link rel="stylesheet" href="/avaliacao/static/css/custom-styles.css">
+    <link rel="stylesheet" href="/avaliacao/static/js/jquery-ui-1.12.1.custom/jquery-ui.css">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@12.6.10/dist/sweetalert2.min.css">
+    <script src="/avaliacao/static/js/jquery-ui-1.12.1.custom/external/jquery/jquery.js"></script>
+    <script src="/avaliacao/static/js/jquery-ui-1.12.1.custom/jquery-ui.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>   
+    <script>
+        function toLowerCase(element) {
+            element.value = element.value.toLowerCase();
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            var mensagemElement = document.getElementById('mensagem');
+            if (mensagemElement) {
+                mensagemElement.style.display = 'block';
+                setTimeout(function() {
+                    mensagemElement.style.display = 'none';
+                }, 5000);
+            }
+        });
+
+        function excluirUsuario(login) {
+            console.log(login);
+            Swal.fire({
+                title: 'Tem certeza?',
+                text: 'Esta ação não poderá ser desfeita.',
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#d33',
+                cancelButtonColor: '#3085d6',
+                confirmButtonText: 'Sim, excluir'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    window.location.href = 'excluir?login=' + login;
+                }
+            });
+        }
+
+    </script>
 </head>
 <body>
     <div class="container d-flex justify-content-center align-items-center vh-100">
-        <div class="card p-4">
-            <h2 class="mb-4">Cadastro de Usuário</h2>
-            <form action="cadastrarUsuario" method="post">
+        <div class="card p-4 w-100">
+            <h2 class="mb-4"><s:if test="cadastroUsuarioModel.loaded">Edição de Usuário</s:if><s:else>Cadastro de Usuário</s:else></h2>
+            <form action="executeCadastro" method="post">
+                <s:if test="cadastroUsuarioModel.loaded">
+                    <div class="form-group">
+                        <label for="cadastroUsuarioModel.nmLogin">Nome de Login</label>
+                        <s:textfield class="form-control" name="cadastroUsuarioModel.nmLogin" maxlength="50" readonly="true" />
+                    </div>
+                    <s:hidden name="cadastroUsuarioModel.nmLogin" />
+                    <s:hidden name="cadastroUsuarioModel.loaded" />
+                </s:if>
+                <s:else>
+                    <div class="form-group">
+                        <label for="cadastroUsuarioModel.nmLogin">Nome de Login</label>
+                        <s:textfield class="form-control" name="cadastroUsuarioModel.nmLogin" maxlength="50" oninput="toLowerCase(this)"/>
+                        <s:fielderror fieldName="cadastroUsuarioModel.nmLogin" />
+                    </div>
+                    <div class="form-group">
+                        <label for="cadastroUsuarioModel.dsSenha">Senha</label>
+                        <s:password class="form-control" name="cadastroUsuarioModel.dsSenha" maxlength="20" />
+                        <s:fielderror fieldName="cadastroUsuarioModel.dsSenha" />
+                    </div>
+                </s:else>                
                 <div class="form-group">
-                    <label for="usuario.nmLogin">Username</label>
-                    <input type="text" class="form-control" id="username" name="usuario.nmLogin">
-					<s:fielderror fieldName="usuario.nmLogin" />
+                    <label for="cadastroUsuarioModel.qtTempoInatividade">Tempo de Inatividade</label>
+                    <s:textfield class="form-control" name="cadastroUsuarioModel.qtTempoInatividade" />
+                    <s:fielderror fieldName="cadastroUsuarioModel.qtTempoInatividade" />
                 </div>
-                <div class="form-group">
-                    <label for="usuario.dsSenha">Password</label>
-                    <input type="text" class="form-control" id="dsSenha" name="usuario.dsSenha">
-					<s:fielderror fieldName="usuario.dsSenha" />
+                <div class="form-group w-25">
+                    <label for="cadastroUsuarioModel.nmRole">Role</label>
+                    <s:select class="form-control" name="cadastroUsuarioModel.nmRole" list="#{'USER':'User', 'ADMIN':'Admin'}" value="cadastroUsuarioModel.nmRole" />
+                    <s:fielderror fieldName="cadastroUsuarioModel.nmRole" />
                 </div>
-                <div class="form-group">
-                    <label for="role">Role</label>
-                    <select class="form-control" id="role" name="usuario.nmRole" ${registerAdmin ? 'disabled' : ''}>
-                        <option value="USER" ${registerAdmin ? '' : 'selected'}>USER</option>
-                        <option value="ADMIN" ${registerAdmin ? 'selected' : ''}>ADMIN</option>
-                    </select>
-                </div>                
-			    <s:if test="errorMessage != null">
-			    	<div class="alert alert-danger" role="alert">
-			        	<s:property value="errorMessage" />
-			        </div>
-			    </s:if>				
-                <button type="submit" class="btn btn-primary">Cadastrar</button>
+                <s:if test="hasActionErrors()">
+                    <div class="alert alert-danger" role="alert">
+                        <s:actionerror />
+                    </div>
+                </s:if>
+                <s:if test="hasActionMessages()">
+                    <div id="mensagem" class="alert alert-success" style="display:none;">
+                        <s:actionmessage/>
+                    </div>
+                </s:if>             
+                <button type="submit" class="btn btn-primary"><s:if test="cadastroUsuarioModel.loaded">Salvar Alterações</s:if><s:else>Cadastrar</s:else></button>
+                <s:if test="cadastroUsuarioModel.loaded">
+                    <button type="button" class="btn btn-danger" onclick="excluirUsuario('${cadastroUsuarioModel.nmLogin}')">Excluir</button>
+                </s:if>                
             </form>
         </div>
-    </div>
-
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    </div>    
 </body>
 </html>

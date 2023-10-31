@@ -108,6 +108,15 @@
 	    
 	    <action name="index" class="com.avaliacao.actions.usuarios.ConsultaAction" method="execute">			
 	        <result name="success">/views/usuarios/consulta.jsp</result>
-	    </action>	    
+	    </action>
+	    
+	    <action name="cadastro" class="com.avaliacao.actions.usuarios.CadastroAction" method="cadastro">			
+	        <result name="input">/views/usuarios/cadastro.jsp</result>
+	    </action>
+	    
+	    <action name="executeCadastro" class="com.avaliacao.actions.usuarios.CadastroAction" method="execute">			
+	        <result name="success" type="redirect">/usuarios/consulta</result>
+	        <result name="error">/views/usuarios/cadastro.jsp</result>
+	    </action>
 	</package>
 </struts>

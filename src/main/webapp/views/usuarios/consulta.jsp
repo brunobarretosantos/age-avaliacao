@@ -30,15 +30,15 @@
             document.getElementById('login').value = '';
             document.getElementById('role').value = 'todos';
 
-            window.location.href = "consultaUsuarios?"
+            window.location.href = "consulta?"
         }
 
         function novoUsuario() {
-            window.location.href = "cadastroUsuario"; // Redireciona para a tela de cadastro de usuário
+            window.location.href = "cadastro";
         }
 
         function editarUsuario(login) {
-            window.location.href = "cadastroUsuario?login=" + login; // Redireciona para a tela de edição de usuário
+            window.location.href = "cadastro?login=" + login;
         }
     </script>
 

@@ -5,7 +5,7 @@ import com.opensymphony.xwork2.ActionSupport;
 import java.util.logging.Logger;
 
 import com.avaliacao.facade.UsuarioFacade;
-import com.avaliacao.model.Usuario;
+import com.avaliacao.model.CadastroUsuarioModel;
 
 public class UsuarioAdminAction extends ActionSupport {
     /**
@@ -14,7 +14,7 @@ public class UsuarioAdminAction extends ActionSupport {
 	private static final long serialVersionUID = 1L;	
 	private static final Logger logger = Logger.getLogger(UsuarioAdminAction.class.getName());
 	
-	private Usuario usuario;
+	private CadastroUsuarioModel usuario;	
     private UsuarioFacade usuarioFacade;
     private String errorMessage;    
     private boolean registerAdmin; 
@@ -27,7 +27,7 @@ public class UsuarioAdminAction extends ActionSupport {
         return errorMessage;
     }
     
-    public Usuario getUsuario() {
+    public CadastroUsuarioModel getUsuario() {
     	return usuario;
     }
 
@@ -37,7 +37,7 @@ public class UsuarioAdminAction extends ActionSupport {
     	registerAdmin = true;
     	errorMessage = null;
     	
-        this.usuario = new Usuario();
+        this.usuario = new CadastroUsuarioModel();
         this.usuarioFacade = new UsuarioFacade();
     } 
     
