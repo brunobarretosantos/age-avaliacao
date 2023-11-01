@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="/avaliacao/static/js/jquery-ui-1.12.1.custom/jquery-ui.css">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <script src="/avaliacao/static/js/jquery-ui-1.12.1.custom/external/jquery/jquery.js"></script>
-    <script src="/avaliacao/static/js/jquery-ui-1.12.1.custom/jquery-ui.js"></script>
+	<script src="/avaliacao/static/js/jquery-ui-1.12.1.custom/jquery-ui.js"></script>
 </head>
 <body>
     <script>
