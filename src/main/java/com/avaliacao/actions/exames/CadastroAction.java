@@ -113,6 +113,11 @@ public class CadastroAction extends ActionSupport {
 			
     	} catch (IllegalArgumentException e) {
     		addActionError(e.getMessage());
+    		
+    		if (id > 0) {
+    			this.exame = this.exameFacade.carregarExame(id);
+    		}
+    		
     		return ERROR;
     		
 		} catch (Exception e) {			
