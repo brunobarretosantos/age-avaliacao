@@ -50,7 +50,8 @@ public class LoginAction extends ActionSupport {
             if (usuarioAutenticado != null) {
             	logger.info("execute.usuarioAutenticado");
             	
-            	HttpSession session = ServletActionContext.getRequest().getSession(true);            	
+            	HttpSession session = ServletActionContext.getRequest().getSession(true);
+            	session.setMaxInactiveInterval(usuario.getQtTempoInatividade() == 0 ? 3600 : usuario.getQtTempoInatividade());
                 session.setAttribute("currentUser", usuario);
             	
                 return SUCCESS;

@@ -3,11 +3,8 @@ package com.avaliacao.model;
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
-import java.util.logging.Logger;
 
-public class Usuario {	
-	private static final Logger logger = Logger.getLogger(Usuario.class.getName());
-	
+public class Usuario {
 	private String nmLogin;	
 	private String dsSenha;
     private int qtTempoInatividade;    
@@ -52,8 +49,6 @@ public class Usuario {
     
     
     public String getEncryptedPassword() throws Exception {
-    	logger.info("getEncryptedPassword.isPasswordEncripted: " + isPasswordEncripted);
-    	logger.info("getEncryptedPassword.dsSenha: " + dsSenha);
     	return Boolean.TRUE.equals(isPasswordEncripted) ? dsSenha : Usuario.makeEncryptedPassword(dsSenha);
     }
     
@@ -77,7 +72,6 @@ public class Usuario {
             return hexString.toString();
         } catch (NoSuchAlgorithmException e) {
             e.printStackTrace();
-            logger.info("makeEncryptedPassword.failed");
             throw e;
         }
     }

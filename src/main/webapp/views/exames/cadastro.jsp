@@ -68,7 +68,7 @@
                 </div>
                 <div class="form-group w-25">
                     <label for="exame.icAtivo">Ativo</label>
-                    <s:select class="form-control" name="exame.icAtivo" list="#{'true':'Sim', 'false':'Não'}" value="true" />
+                    <s:select class="form-control" name="exame.icAtivo" list="#{'true':'Sim', 'false':'Não'}" value="exame.icAtivo"/>
                     <s:fielderror fieldName="exame.icAtivo" />
                 </div>
                 <div class="form-group">
