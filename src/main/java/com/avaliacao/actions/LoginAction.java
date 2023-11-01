@@ -45,7 +45,7 @@ public class LoginAction extends ActionSupport {
 	        }			
 			
 			logger.info("execute.autenticacao");
-            Usuario usuarioAutenticado = usuarioFacade.autenticar(usuario.getNmLogin(), usuario.getEncryptedPassword());
+            Usuario usuarioAutenticado = usuarioFacade.autenticar(usuario);
 
             if (usuarioAutenticado != null) {
             	logger.info("execute.usuarioAutenticado");

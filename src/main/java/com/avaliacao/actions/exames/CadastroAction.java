@@ -45,9 +45,9 @@ public class CadastroAction extends ActionSupport {
 		
 		if (this.id > 0) {
 	        exame = exameFacade.carregarExame(this.id);
-	        if (exame != null) {
-	            return INPUT;
-	        }
+	        if (exame == null) {
+	        	addActionError("Não existe exame com o id informado");
+	        } 
 	    }
 		
 		return INPUT;		

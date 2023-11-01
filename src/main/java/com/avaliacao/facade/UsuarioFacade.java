@@ -17,11 +17,19 @@ public class UsuarioFacade {
     public boolean cadastrarUsuario(CadastroUsuarioModel model) {
         return usuarioDAO.inserirUsuario(model.makeUsuario(true));
     }
+    
+    public Usuario autenticar(String login, String password) throws Exception {
+    	Usuario usuario = new Usuario();
+    	usuario.setNmLogin(login);
+    	usuario.setDsSenha(password);
+    	
+    	return autenticar(usuario);
+    }
 
-    public Usuario autenticar(String nmLogin, String encryptedPassword) throws Exception { 
-        Usuario usuario = usuarioDAO.getByLogin(nmLogin);
+    public Usuario autenticar(Usuario usuario) throws Exception { 
+        Usuario dbUsuario = usuarioDAO.getByLogin(usuario.getNmLogin());
 
-        if (usuario != null && usuario.getEncryptedPassword().equals(encryptedPassword)) {
+        if (dbUsuario != null && dbUsuario.getEncryptedPassword().equals(usuario.getEncryptedPassword())) {
             return usuario;
         }
 

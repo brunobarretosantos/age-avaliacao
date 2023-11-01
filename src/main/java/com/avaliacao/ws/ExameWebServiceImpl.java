@@ -1,13 +1,17 @@
 package com.avaliacao.ws;
 
 import javax.ejb.Stateless;
+import javax.interceptor.Interceptors;
 import javax.jws.WebService;
+
+//import org.jboss.ws.api.annotation.WebContext;
 
 import com.avaliacao.facade.ExameFacade;
 import com.avaliacao.model.Exame;
 
 @Stateless
 @WebService(name = "soap")
+//@WebContext(authMethod = "BASIC")
 public class ExameWebServiceImpl implements ExameWebService {
 	private ExameFacade exameFacade;
 	
@@ -15,8 +19,9 @@ public class ExameWebServiceImpl implements ExameWebService {
 		exameFacade = new ExameFacade();
 	}
 	
-
+	
 	@Override
+	@Interceptors(BasicAuthInterceptor.class)
 	public Exame consultarExame(int id) {		
 		return exameFacade.carregarExame(id);
 	}
