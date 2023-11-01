@@ -21,4 +21,22 @@ public class ExameWebServiceImpl implements ExameWebService {
 		return exameFacade.carregarExame(id);
 	}
 
+
+	@Override
+	public Exame criarExame(Exame exame) {
+		return exameFacade.incluirExame(exame);
+	}
+
+
+	@Override
+	public boolean atualizarExame(Exame exame) {
+		return exameFacade.alterarExame(exame);
+	}
+
+
+	@Override
+	public boolean excluirExame(int id) {
+		return exameFacade.excluirExame(id);
+	}
+
 }
