@@ -1,10 +1,10 @@
 <!DOCTYPE struts PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 2.5//EN" "http://struts.apache.org/dtds/struts-2.5.dtd">
 <struts>
 	<constant name="struts.devMode" value="true" />
-	<constant name="struts.i18n.encoding" value="UTF-8" />
+	<constant name="struts.i18n.encoding" value="UTF-8" />	
     
     <package name="default" namespace="/" extends="struts-default">
-		
+    
 		<interceptors>
 	        <interceptor name="sessionIntercept" class="com.avaliacao.interceptors.SessionInterceptor"/>
 	        <interceptor-stack name="interceptorStack">
@@ -14,13 +14,18 @@
 	    </interceptors>
 	
 	    <default-interceptor-ref name="interceptorStack"/>
-		
-		<default-action-ref name="index" />
-        <action name="index" class="com.avaliacao.actions.IndexAction" method="execute">
+	    
+	    <default-action-ref name="index" />
+	    
+	    <global-results>
 			<result name="login" type="redirect">/auth/login</result>
+		</global-results>		
+		
+        <action name="index" class="com.avaliacao.actions.IndexAction" method="execute">			
             <result name="success" type="redirect">/funcionarios/consulta</result>
             <result name="error412" type="redirect">/user-admin/create</result>
         </action>
+                
     </package>
     
     <package name="user-admin" namespace="/user-admin" extends="struts-default">
@@ -44,10 +49,11 @@
         </action>
     </package>
     
-    <package name="exames" namespace="/exames" extends="struts-default">
+    <package name="exames" namespace="/exames" extends="default">
 		<default-action-ref name="index" />
+		
         <action name="index" class="com.avaliacao.actions.exames.ConsultaAction" method="execute">
-            <result name="success">/views/exames/consulta.jsp</result>
+            <result name="success">/views/exames/consulta.jsp</result>            
         </action>
         
         <action name="cadastro" class="com.avaliacao.actions.exames.CadastroAction" method="cadastro">
@@ -65,7 +71,7 @@
         </action>
     </package>
     
-    <package name="funcionarios" namespace="/funcionarios" extends="struts-default">
+    <package name="funcionarios" namespace="/funcionarios" extends="default">
 	    <default-action-ref name="index" />
 	    
 	    <action name="index" class="com.avaliacao.actions.funcionarios.ConsultaAction" method="execute">			
@@ -87,7 +93,7 @@
 	    </action>
 	</package>
 	
-	<package name="exames_realizados" namespace="/exames-realizados" extends="struts-default">
+	<package name="exames_realizados" namespace="/exames-realizados" extends="default">
 		<default-action-ref name="index" />
         <action name="index" class="com.avaliacao.actions.exames_realizados.ConsultaAction" method="execute">			
             <result name="success">/views/exames_realizados/consulta.jsp</result>
@@ -107,7 +113,7 @@
 	    </action>
     </package>
     
-    <package name="usuarios" namespace="/usuarios" extends="struts-default">
+    <package name="usuarios" namespace="/usuarios" extends="default">
 	    <default-action-ref name="index" />
 	    
 	    <action name="index" class="com.avaliacao.actions.usuarios.ConsultaAction" method="execute">			
