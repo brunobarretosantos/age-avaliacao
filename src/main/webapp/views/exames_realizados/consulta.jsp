@@ -5,7 +5,6 @@
 <head>
     <meta charset="UTF-8">
     <title>Consulta de Exames Realizados</title>
-    <link rel="stylesheet" href="/context-path/static/css/custom-styles.css">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 </head>
 <body>
@@ -37,6 +36,10 @@
         function novoExame() {
             window.location.href = "cadastro"; // Redireciona para a tela de cadastro
         }
+        
+        function relatorio() {
+            window.location.href = "relatorio"; // Redireciona para a tela de cadastro
+        }
     </script>
     
     <%@include file="/layout/navbar.jsp" %>
@@ -56,7 +59,8 @@
 
             <button type="button" class="btn btn-primary mr-3" onclick="consulta(1)">Pesquisar</button>
             <button type="button" class="btn btn-secondary mr-3" onclick="limparCampos()">Limpar</button>
-            <button type="button" class="btn btn-success" onclick="novoExame()">Novo Exame</button>
+            <button type="button" class="btn btn-success mr-3" onclick="novoExame()">Novo Exame</button>
+            <button type="button" class="btn btn-info" onclick="relatorio()">Relatório</button>
         </form>
 
         <table class="table">

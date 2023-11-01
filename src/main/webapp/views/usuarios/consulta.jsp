@@ -5,7 +5,6 @@
 <head>
     <meta charset="UTF-8">
     <title>Consulta de Usuários</title>
-    <link rel="stylesheet" href="/context-path/static/css/custom-styles.css">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 </head>
 <body>

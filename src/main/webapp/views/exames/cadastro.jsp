@@ -50,7 +50,7 @@
 	
 	<%@include file="/layout/navbar.jsp" %>
 	
-    <div class="container d-flex justify-content-center align-items-center vh-100">
+    <div class="container">
         <div class="card p-4 w-100">
             <h2 class="mb-4"><s:if test="id > 0">Edição de Exame</s:if><s:else>Cadastro de Exame</s:else></h2>
             <form action="executeCadastro" method="post">

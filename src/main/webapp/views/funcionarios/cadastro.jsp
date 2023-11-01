@@ -5,7 +5,6 @@
 <head>
     <meta charset="UTF-8">
     <title><s:if test="id > 0">Edição de Funcionário</s:if><s:else>Cadastro de Funcionário</s:else></title>
-    <link rel="stylesheet" href="/context-path/static/css/custom-styles.css">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@12.6.10/dist/sweetalert2.min.css">
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
@@ -45,7 +44,7 @@
 
     </script>
     <%@include file="/layout/navbar.jsp" %>
-    <div class="container d-flex justify-content-center align-items-center vh-100">
+    <div class="container">
         <div class="card p-4 w-100">
             <h2 class="mb-4"><s:if test="id > 0">Edição de Funcionário</s:if><s:else>Cadastro de Funcionário</s:else></h2>
             <form action="executeCadastro" method="post">
