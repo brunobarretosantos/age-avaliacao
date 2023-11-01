@@ -18,7 +18,7 @@
 		<default-action-ref name="index" />
         <action name="index" class="com.avaliacao.actions.IndexAction" method="execute">
 			<result name="login" type="redirect">/auth/login</result>
-            <result name="success">/index.jsp</result>
+            <result name="success" type="redirect">/funcionarios/consulta</result>
             <result name="error412" type="redirect">/user-admin/create</result>
         </action>
     </package>

@@ -6,7 +6,7 @@
     <display-name>Basic Struts2</display-name>
     <welcome-file-list>
         <welcome-file>index</welcome-file>
-    </welcome-file-list>
+    </welcome-file-list>    
 
     <filter>
         <filter-name>struts2</filter-name>
@@ -15,7 +15,31 @@
 
     <filter-mapping>
         <filter-name>struts2</filter-name>
-        <url-pattern>/*</url-pattern>
-    </filter-mapping>    
-
+        <url-pattern>/funcionarios/*</url-pattern>        
+    </filter-mapping>
+    
+    <filter-mapping>
+        <filter-name>struts2</filter-name>
+        <url-pattern>/auth/*</url-pattern>        
+    </filter-mapping>
+    
+    <filter-mapping>
+        <filter-name>struts2</filter-name>
+        <url-pattern>/user-admin/*</url-pattern>        
+    </filter-mapping>
+    
+    <filter-mapping>
+        <filter-name>struts2</filter-name>
+        <url-pattern>/exames/*</url-pattern>        
+    </filter-mapping>
+    
+    <filter-mapping>
+        <filter-name>struts2</filter-name>
+        <url-pattern>/exames-realizados/*</url-pattern>        
+    </filter-mapping>
+    
+    <filter-mapping>
+        <filter-name>struts2</filter-name>
+        <url-pattern>/usuarios/*</url-pattern>        
+    </filter-mapping>
 </web-app>
