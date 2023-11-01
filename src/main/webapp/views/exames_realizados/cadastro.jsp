@@ -17,6 +17,7 @@
     </script>
 </head>
 <body>
+	<%@include file="/layout/navbar.jsp" %>
     <div class="container">
         <h2>Cadastro de Exame Realizado</h2>
 
@@ -48,6 +49,7 @@
 			</s:if>
             <button type="submit" class="btn btn-primary">Cadastrar</button>
         </form>
-    </div>    
+    </div>
+    <%@include file="/layout/footer.jsp" %>
 </body>
 </html>

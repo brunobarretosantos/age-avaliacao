@@ -47,6 +47,7 @@
     </script>
 </head>
 <body>
+	<%@include file="/layout/navbar.jsp" %>
     <div class="container d-flex justify-content-center align-items-center vh-100">
         <div class="card p-4 w-100">
             <h2 class="mb-4"><s:if test="cadastroUsuarioModel.loaded">Edição de Usuário</s:if><s:else>Cadastro de Usuário</s:else></h2>
@@ -96,6 +97,7 @@
                 <button type="submit" class="btn btn-primary"><s:if test="cadastroUsuarioModel.loaded">Salvar Alterações</s:if><s:else>Cadastrar</s:else></button>
             </form>
         </div>
-    </div>    
+    </div>
+    <%@include file="/layout/footer.jsp" %>
 </body>
 </html>

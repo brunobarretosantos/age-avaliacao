@@ -43,6 +43,11 @@
 			<result name="input">/views/auth/login.jsp</result>
         </action>
         
+        <action name="logout" class="com.avaliacao.actions.LoginAction" method="logout">
+		    <result name="success" type="redirect">/auth/login</result>
+		</action>
+
+        
         <action name="execute" class="com.avaliacao.actions.LoginAction" method="execute">
             <result name="success" type="redirect">/</result>
             <result name="error">/views/auth/login.jsp</result>

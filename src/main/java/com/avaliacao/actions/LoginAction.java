@@ -70,4 +70,13 @@ public class LoginAction extends ActionSupport {
             return ERROR;
         }
 	}
+	
+	public String logout() {
+	    HttpSession session = ServletActionContext.getRequest().getSession(false);
+	    if (session != null) {
+	        session.invalidate(); 
+	    }
+	    return SUCCESS;
+	}
+
 }

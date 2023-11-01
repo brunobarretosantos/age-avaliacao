@@ -51,7 +51,7 @@
             $("#dtFim").datepicker({ dateFormat: 'dd/mm/yy' });
         });
     </script>
-
+	<%@include file="/layout/navbar.jsp" %>
     <div class="container">
         <h2>Relatório de Exames Realizados</h2>
 
@@ -147,6 +147,7 @@
 	            </ul>
 	        </nav>
 		</s:if>
-    </div>        
+    </div>
+    <%@include file="/layout/footer.jsp" %>        
 </body>
 </html>

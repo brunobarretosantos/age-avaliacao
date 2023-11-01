@@ -44,6 +44,7 @@
         }
 
     </script>
+    <%@include file="/layout/navbar.jsp" %>
     <div class="container d-flex justify-content-center align-items-center vh-100">
         <div class="card p-4 w-100">
             <h2 class="mb-4"><s:if test="id > 0">Edição de Funcionário</s:if><s:else>Cadastro de Funcionário</s:else></h2>
@@ -77,7 +78,7 @@
             </form>
         </div>
     </div>
-
+	<%@include file="/layout/footer.jsp" %>
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>

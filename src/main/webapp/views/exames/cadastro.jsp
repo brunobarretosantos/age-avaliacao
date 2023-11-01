@@ -47,6 +47,9 @@
 		}
 
 	</script>
+	
+	<%@include file="/layout/navbar.jsp" %>
+	
     <div class="container d-flex justify-content-center align-items-center vh-100">
         <div class="card p-4 w-100">
             <h2 class="mb-4"><s:if test="id > 0">Edição de Exame</s:if><s:else>Cadastro de Exame</s:else></h2>
@@ -95,6 +98,7 @@
 				                
             </form>
         </div>
-    </div>    
+    </div>
+    <%@include file="/layout/footer.jsp" %>
 </body>
 </html>
